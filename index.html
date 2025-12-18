@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sistema CT - Gestão Integrada</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div id="auth-screen">
+        <div id="tela-login" class="auth-box">
+            <h2>Acesso ao Sistema</h2>
+            <input type="email" id="login-email" placeholder="E-mail">
+            <input type="password" id="login-senha" placeholder="Senha">
+            <button onclick="fazerLogin()">Entrar</button>
+            <p>Não tem conta? <a href="#" onclick="alternarAuth('cadastro')">Cadastre-se</a></p>
+        </div>
+
+        <div id="tela-cadastro" class="auth-box" style="display: none;">
+            <h2>Cadastro de Profissional</h2>
+            <input type="text" id="cad-nome" placeholder="Nome Completo">
+            <select id="cad-cargo">
+                <option value="educador">Educador / Monitor</option>
+                <option value="psicologa">Psicóloga(o)</option>
+                <option value="social">Assistente Social</option>
+            </select>
+            <input type="email" id="cad-email" placeholder="E-mail">
+            <input type="password" id="cad-senha" placeholder="Senha">
+            <button onclick="cadastrarProfissional()">Salvar</button>
+            <p><a href="#" onclick="alternarAuth('login')">Voltar</a></p>
+        </div>
+    </div>
+
+    <div id="app" style="display: none;">
+        <aside id="sidebar">
+            <div class="side-header">
+                <h3>SISTEMA CT</h3>
+                <span id="user-role-badge"></span>
+            </div>
+            <p id="user-name-display"></p>
+            <ul id="menu-dinamico"></ul>
+            <button onclick="logout()" class="btn-logout">Sair</button>
+        </aside>
+
+        <main id="main-content">
+            <header class="top-bar">
+                <h1 id="page-title">Dashboard</h1>
+            </header>
+
+            <div id="dashboard-home" class="view-section">
+                <div class="welcome-card">
+                    <h2 id="welcome-text"></h2>
+                    <p>Paz do Senhor. Selecione uma opção no menu lateral.</p>
+                </div>
+                <div class="stats-grid" id="stats-area"></div>
+            </div>
+
+            <div id="view-acolhidos" class="view-section" style="display:none;">
+                <div class="section-header">
+                    <h2>Acolhidos na Casa</h2>
+                    <button class="btn-add" onclick="abrirModal('modal-acolhido')">+ Novo Acolhido</button>
+                </div>
+                <table class="tabela-dados">
+                    <thead>
+                        <tr><th>Nome</th><th>Idade</th><th>Cidade</th><th>Substância</th><th>Ações</th></tr>
+                    </thead>
+                    <tbody id="lista-acolhidos-tabela"></tbody>
+                </table>
+            </div>
+
+            <div id="view-diario" class="view-section" style="display:none;">
+                <h2>Diário de Bordo</h2>
+                <div class="cards-grid" id="cards-diario-acolhidos"></div>
+            </div>
+
+            <div id="view-atividades" class="view-section" style="display:none;">
+                <h2>Cronograma de Atividades</h2>
+                <div class="welcome-card">
+                    <select id="atv-tipo">
+                        <option value="Previnir">Previnir (PPR)</option>
+                        <option value="Psicosocial">Psicossocial</option>
+                        <option value="NA">Narcóticos Anônimos</option>
+                        <option value="Espiritualidade">Espiritualidade</option>
+                    </select>
+                    <button class="btn-add" onclick="adicionarAtividade()">Adicionar</button>
+                </div>
+                <ul id="lista-atividades" class="lista-check"></ul>
+            </div>
+
+            <div id="view-psi-agendamentos" class="view-section" style="display:none;">
+                <h2>Agendamentos de Atendimento</h2>
+                <div class="welcome-card">
+                    <select id="agendar-acolhido"></select>
+                    <input type="datetime-local" id="agendar-data">
+                    <button class="btn-add" onclick="salvarAgendamento()">Agendar</button>
+                </div>
+                <ul id="lista-agendamentos" class="lista-check"></ul>
+            </div>
+
+            <div id="view-psi-prontuario" class="view-section" style="display:none;">
+                <h2>Prontuário Clínico (Sigiloso)</h2>
+                <div class="cards-grid" id="lista-prontuarios"></div>
+            </div>
+        </main>
+    </div>
+
+    <div id="modal-acolhido" class="modal">
+        <div class="modal-content">
+            <h3>Novo Acolhido</h3>
+            <input type="text" id="ac-nome" placeholder="Nome Completo">
+            <input type="number" id="ac-idade" placeholder="Idade">
+            <input type="text" id="ac-cidade" placeholder="Cidade">
+            <input type="text" id="ac-droga" placeholder="Droga de Escolha">
+            <textarea id="ac-ocorrencia" placeholder="Obs de entrada"></textarea>
+            <div class="modal-buttons">
+                <button onclick="salvarAcolhido()" class="btn-save">Salvar</button>
+                <button onclick="fecharModal('modal-acolhido')" class="btn-cancel">Cancelar</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="modal-evolucao" class="modal">
+        <div class="modal-content" style="width: 550px;">
+            <h3 id="evol-nome-acolhido">Evolução Clínica</h3>
+            <select id="evol-humor">
+                <option>Estável</option><option>Ansioso</option><option>Resistente</option>
+            </select>
+            <textarea id="evol-texto" rows="5" placeholder="Relato técnico da sessão..."></textarea>
+            <div class="modal-buttons">
+                <button onclick="salvarEvolucaoClinica()" class="btn-save">Gravar Evolução</button>
+                <button onclick="fecharModal('modal-evolucao')" class="btn-cancel">Fechar</button>
+            </div>
+            <h4>Histórico Clínico:</h4>
+            <div id="historico-evolucoes" style="max-height: 150px; overflow-y: auto; font-size: 13px; background: #f9f9f9; padding: 10px;"></div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
