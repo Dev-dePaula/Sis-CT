@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sistema CT - Gestão Administrativa</title>
+    <title>Sistema CT - Gestão Completa</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -13,12 +13,12 @@
             <h2>Login Sistema CT</h2>
             <input type="email" id="login-email" placeholder="E-mail">
             <input type="password" id="login-senha" placeholder="Senha">
-            <button onclick="fazerLogin()">Acessar Painel</button>
+            <button onclick="fazerLogin()">Entrar</button>
             <p>Novo profissional? <a href="#" onclick="alternarAuth('cadastro')">Cadastre-se</a></p>
         </div>
 
         <div id="tela-cadastro" class="auth-box" style="display: none;">
-            <h2>Cadastro de Profissional</h2>
+            <h2>Cadastro Profissional</h2>
             <input type="text" id="cad-nome" placeholder="Nome Completo">
             <select id="cad-cargo">
                 <option value="educador">Educador / Monitor</option>
@@ -26,10 +26,10 @@
                 <option value="social">Assistente Social</option>
                 <option value="admin">Administrador (Diretoria)</option>
             </select>
-            <input type="email" id="cad-email" placeholder="E-mail de Acesso">
+            <input type="email" id="cad-email" placeholder="E-mail">
             <input type="password" id="cad-senha" placeholder="Senha">
-            <button onclick="cadastrarProfissional()">Finalizar Cadastro</button>
-            <p><a href="#" onclick="alternarAuth('login')">Voltar ao Login</a></p>
+            <button onclick="cadastrarProfissional()">Salvar</button>
+            <p><a href="#" onclick="alternarAuth('login')">Voltar</a></p>
         </div>
     </div>
 
@@ -41,7 +41,7 @@
             </div>
             <p id="user-name-display"></p>
             <ul id="menu-dinamico"></ul>
-            <button onclick="logout()" class="btn-logout">Sair do Sistema</button>
+            <button onclick="logout()" class="btn-logout">Sair</button>
         </aside>
 
         <main id="main-content">
@@ -52,7 +52,7 @@
             <div id="dashboard-home" class="view-section">
                 <div class="welcome-card">
                     <h2 id="welcome-text"></h2>
-                    <p>Visão geral da unidade de recuperação.</p>
+                    <p>Resumo operacional da unidade.</p>
                 </div>
                 <div class="stats-grid" id="stats-area"></div>
             </div>
@@ -60,9 +60,7 @@
             <div id="view-admin-equipe" class="view-section" style="display:none;">
                 <h2>Gestão de Equipe Profissional</h2>
                 <table class="tabela-dados">
-                    <thead>
-                        <tr><th>Nome</th><th>Cargo</th><th>E-mail</th><th>Ações</th></tr>
-                    </thead>
+                    <thead><tr><th>Nome</th><th>Cargo</th><th>E-mail</th><th>Ações</th></tr></thead>
                     <tbody id="lista-profissionais-tabela"></tbody>
                 </table>
             </div>
@@ -73,9 +71,7 @@
                     <button class="btn-add" onclick="abrirModal('modal-acolhido')">+ Novo Acolhido</button>
                 </div>
                 <table class="tabela-dados">
-                    <thead>
-                        <tr><th>Nome</th><th>Idade</th><th>Substância</th><th>Ações</th></tr>
-                    </thead>
+                    <thead><tr><th>Nome</th><th>Idade</th><th>Substância</th><th>Ações</th></tr></thead>
                     <tbody id="lista-acolhidos-tabela"></tbody>
                 </table>
             </div>
@@ -85,49 +81,42 @@
                 <div class="cards-grid" id="cards-diario-acolhidos"></div>
             </div>
             <div id="view-atividades" class="view-section" style="display:none;">
-                <h2>Atividades</h2>
+                <h2>Cronograma de Atividades</h2>
                 <div class="welcome-card">
-                    <button class="btn-add" onclick="adicionarAtividade()">+ Simular Atividade</button>
+                    <select id="atv-tipo"><option>Previnir</option><option>Psicossocial</option><option>Espiritualidade</option></select>
+                    <button class="btn-add" onclick="adicionarAtividade()">Lançar</button>
                 </div>
                 <ul id="lista-atividades" class="lista-check"></ul>
             </div>
 
+            <div id="view-psi-agendamentos" class="view-section" style="display:none;">
+                <h2>Agenda de Atendimentos</h2>
+                <div class="welcome-card">
+                    <select id="agendar-acolhido"></select>
+                    <input type="datetime-local" id="agendar-data">
+                    <button class="btn-add" onclick="salvarAgendamento()">Agendar</button>
+                </div>
+                <ul id="lista-agendamentos" class="lista-check"></ul>
+            </div>
             <div id="view-psi-prontuario" class="view-section" style="display:none;">
-                <h2>Prontuários Clínicos</h2>
+                <h2>Evoluções Clínicas</h2>
                 <div class="cards-grid" id="lista-prontuarios"></div>
             </div>
 
             <div id="view-social-familia" class="view-section" style="display:none;">
-                <h2>Contatos Sociais/Familiares</h2>
+                <h2>Contatos Familiares</h2>
+                <div class="welcome-card"><select id="soc-familia-acolhido"></select><textarea id="soc-obs-familia"></textarea><button class="btn-add" onclick="salvarContatoSocial()">Gravar</button></div>
                 <div id="lista-contatos-familia"></div>
+            </div>
+            <div id="view-social-documentos" class="view-section" style="display:none;">
+                <h2>Checklist Documental</h2>
+                <div class="cards-grid" id="lista-docs-acolhidos"></div>
             </div>
         </main>
     </div>
 
-    <div id="modal-acolhido" class="modal">
-        <div class="modal-content">
-            <h3>Novo Cadastro</h3>
-            <input type="text" id="ac-nome" placeholder="Nome Completo">
-            <input type="number" id="ac-idade" placeholder="Idade">
-            <input type="text" id="ac-cidade" placeholder="Cidade">
-            <input type="text" id="ac-droga" placeholder="Substância Principal">
-            <div class="modal-buttons">
-                <button onclick="salvarAcolhido()" class="btn-save">Salvar</button>
-                <button onclick="fecharModal('modal-acolhido')" class="btn-cancel">Cancelar</button>
-            </div>
-        </div>
-    </div>
-
-    <div id="modal-evolucao" class="modal">
-        <div class="modal-content">
-            <h3 id="evol-nome-acolhido">Evolução</h3>
-            <textarea id="evol-texto" rows="5" placeholder="Relato clínico..."></textarea>
-            <div class="modal-buttons">
-                <button onclick="salvarEvolucaoClinica()" class="btn-save">Gravar</button>
-                <button onclick="fecharModal('modal-evolucao')" class="btn-cancel">Fechar</button>
-            </div>
-        </div>
-    </div>
+    <div id="modal-acolhido" class="modal"><div class="modal-content"><h3>Novo Acolhido</h3><input id="ac-nome" placeholder="Nome"><input id="ac-idade" type="number"><input id="ac-droga" placeholder="Droga"><button onclick="salvarAcolhido()">Salvar</button><button onclick="fecharModal('modal-acolhido')">Fechar</button></div></div>
+    <div id="modal-evolucao" class="modal"><div class="modal-content"><h3 id="evol-nome-acolhido"></h3><textarea id="evol-texto" rows="5"></textarea><button onclick="salvarEvolucaoClinica()">Gravar</button><button onclick="fecharModal('modal-evolucao')">Fechar</button></div></div>
 
     <script src="script.js"></script>
 </body>
