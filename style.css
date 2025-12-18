@@ -1,48 +1,45 @@
 * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', sans-serif; }
 body { background-color: #f4f7f6; color: #333; overflow: hidden; }
 
-/* Telas de Acesso */
+/* Login e Cadastro */
 #auth-screen { height: 100vh; display: flex; justify-content: center; align-items: center; background: #2c3e50; }
-.auth-box { background: white; padding: 40px; border-radius: 10px; width: 350px; text-align: center; box-shadow: 0 10px 20px rgba(0,0,0,0.2); }
-.auth-box input, .auth-box select { width: 100%; padding: 12px; margin-bottom: 15px; border: 1px solid #ddd; border-radius: 5px; }
-.auth-box button { width: 100%; padding: 12px; background: #27ae60; color: white; border: none; border-radius: 5px; cursor: pointer; font-weight: bold; }
+.auth-box { background: white; padding: 35px; border-radius: 12px; width: 350px; text-align: center; box-shadow: 0 10px 30px rgba(0,0,0,0.3); }
+.auth-box h2 { margin-bottom: 25px; color: #2c3e50; }
+.auth-box input, .auth-box select { width: 100%; padding: 12px; margin-bottom: 15px; border: 1px solid #ddd; border-radius: 6px; }
+.auth-box button { width: 100%; padding: 12px; background: #27ae60; color: white; border: none; border-radius: 6px; cursor: pointer; font-weight: bold; }
 
-/* Dashboard Estrutura */
+/* Estrutura Dashboard */
 #app { display: flex; height: 100vh; }
 #sidebar { width: 260px; background: #1a252f; color: white; display: flex; flex-direction: column; }
-.side-header { padding: 25px; text-align: center; background: #141d26; }
-#user-role-badge { background: #3498db; font-size: 10px; padding: 3px 10px; border-radius: 20px; text-transform: uppercase; }
-#user-name-display { padding: 15px; text-align: center; border-bottom: 1px solid #34495e; color: #bdc3c7; font-size: 14px; }
+.side-header { padding: 30px 20px; background: #141d26; text-align: center; }
+#user-role-badge { background: #e74c3c; font-size: 10px; padding: 3px 10px; border-radius: 20px; text-transform: uppercase; }
+#user-name-display { padding: 15px; text-align: center; border-bottom: 1px solid #34495e; color: #bdc3c7; }
 #menu-dinamico { list-style: none; flex: 1; }
-#menu-dinamico li { padding: 15px 20px; cursor: pointer; transition: 0.3s; }
+#menu-dinamico li { padding: 15px 25px; cursor: pointer; transition: 0.3s; border-left: 4px solid transparent; }
 #menu-dinamico li:hover { background: #2c3e50; border-left: 4px solid #3498db; }
-.btn-logout { background: #c0392b; color: white; border: none; padding: 15px; cursor: pointer; }
+.btn-logout { background: #c0392b; color: white; border: none; padding: 15px; cursor: pointer; font-weight: bold; }
 
-/* Conteúdo Principal */
+/* Área Principal */
 #main-content { flex: 1; padding: 30px; overflow-y: auto; }
 .top-bar { margin-bottom: 30px; border-bottom: 2px solid #ddd; padding-bottom: 10px; }
-.welcome-card { background: white; padding: 25px; border-radius: 10px; border-left: 5px solid #27ae60; box-shadow: 0 2px 5px rgba(0,0,0,0.05); margin-bottom: 25px; }
+.welcome-card { background: white; padding: 25px; border-radius: 10px; border-left: 6px solid #27ae60; box-shadow: 0 4px 6px rgba(0,0,0,0.05); margin-bottom: 25px; }
 
-/* Grids e Cards */
-.stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 20px; }
-.stat-card { background: white; padding: 25px; border-radius: 10px; box-shadow: 0 2px 5px rgba(0,0,0,0.05); text-align: center; cursor: pointer; transition: 0.3s; }
-.stat-card:hover { transform: translateY(-5px); }
-.stat-card h4 { color: #7f8c8d; font-size: 14px; }
-.stat-card p { font-size: 30px; font-weight: bold; color: #2c3e50; }
+/* Cards e Tabelas */
+.stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px; }
+.stat-card { background: white; padding: 25px; border-radius: 10px; text-align: center; box-shadow: 0 4px 6px rgba(0,0,0,0.05); }
+.stat-card h4 { color: #7f8c8d; font-size: 13px; margin-bottom: 10px; }
+.stat-card p { font-size: 32px; font-weight: bold; color: #2c3e50; }
 
-.cards-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 20px; }
-.card-paciente { background: white; padding: 20px; border-radius: 10px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); border-top: 5px solid #3498db; }
-.card-paciente textarea { width: 100%; margin: 10px 0; padding: 10px; border-radius: 5px; border: 1px solid #ddd; resize: none; }
-
-/* Tabelas e Modais */
-.tabela-dados { width: 100%; border-collapse: collapse; background: white; border-radius: 8px; overflow: hidden; }
+.tabela-dados { width: 100%; border-collapse: collapse; background: white; border-radius: 10px; overflow: hidden; box-shadow: 0 4px 6px rgba(0,0,0,0.05); }
 .tabela-dados th, .tabela-dados td { padding: 15px; text-align: left; border-bottom: 1px solid #eee; }
 .tabela-dados th { background: #34495e; color: white; }
 
-.modal { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.7); display: none; justify-content: center; align-items: center; z-index: 1000; }
-.modal-content { background: white; padding: 30px; border-radius: 12px; width: 450px; display: flex; flex-direction: column; gap: 15px; }
+.cards-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 20px; }
+.card-paciente { background: white; padding: 20px; border-radius: 10px; border-top: 5px solid #3498db; box-shadow: 0 4px 6px rgba(0,0,0,0.05); }
 
-.btn-add, .btn-save { background: #27ae60; color: white; border: none; padding: 10px 20px; border-radius: 5px; cursor: pointer; font-weight: bold; }
-.btn-cancel { background: #95a5a6; color: white; border: none; padding: 10px 20px; border-radius: 5px; cursor: pointer; }
-
-.lista-check li { background: white; padding: 15px; margin-top: 10px; border-radius: 5px; display: flex; justify-content: space-between; border-left: 5px solid #3498db; }
+/* Modais e Botões */
+.modal { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.75); display: none; justify-content: center; align-items: center; z-index: 2000; }
+.modal-content { background: white; padding: 35px; border-radius: 12px; width: 450px; display: flex; flex-direction: column; gap: 15px; }
+.btn-add, .btn-save { background: #27ae60; color: white; border: none; padding: 10px 20px; border-radius: 6px; cursor: pointer; }
+.btn-cancel { background: #95a5a6; color: white; border: none; padding: 10px 20px; border-radius: 6px; cursor: pointer; }
+.btn-delete { background: #e74c3c; color: white; border: none; padding: 6px 12px; border-radius: 4px; cursor: pointer; font-size: 12px; }
