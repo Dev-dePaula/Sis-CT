@@ -3,18 +3,18 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sistema CT - Gestão Integrada</title>
+    <title>Sistema CT - Gestão Administrativa</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
     <div id="auth-screen">
         <div id="tela-login" class="auth-box">
-            <h2>Acesso ao Sistema</h2>
+            <h2>Login Sistema CT</h2>
             <input type="email" id="login-email" placeholder="E-mail">
             <input type="password" id="login-senha" placeholder="Senha">
-            <button onclick="fazerLogin()">Entrar</button>
-            <p>Não tem conta? <a href="#" onclick="alternarAuth('cadastro')">Cadastre-se</a></p>
+            <button onclick="fazerLogin()">Acessar Painel</button>
+            <p>Novo profissional? <a href="#" onclick="alternarAuth('cadastro')">Cadastre-se</a></p>
         </div>
 
         <div id="tela-cadastro" class="auth-box" style="display: none;">
@@ -24,11 +24,12 @@
                 <option value="educador">Educador / Monitor</option>
                 <option value="psicologa">Psicóloga(o)</option>
                 <option value="social">Assistente Social</option>
+                <option value="admin">Administrador (Diretoria)</option>
             </select>
-            <input type="email" id="cad-email" placeholder="E-mail">
+            <input type="email" id="cad-email" placeholder="E-mail de Acesso">
             <input type="password" id="cad-senha" placeholder="Senha">
-            <button onclick="cadastrarProfissional()">Salvar Registro</button>
-            <p><a href="#" onclick="alternarAuth('login')">Voltar</a></p>
+            <button onclick="cadastrarProfissional()">Finalizar Cadastro</button>
+            <p><a href="#" onclick="alternarAuth('login')">Voltar ao Login</a></p>
         </div>
     </div>
 
@@ -36,9 +37,9 @@
         <aside id="sidebar">
             <div class="side-header">
                 <h3>SISTEMA CT</h3>
-                <span id="user-role-badge">Cargo</span>
+                <span id="user-role-badge"></span>
             </div>
-            <p id="user-name-display">Nome do Usuário</p>
+            <p id="user-name-display"></p>
             <ul id="menu-dinamico"></ul>
             <button onclick="logout()" class="btn-logout">Sair do Sistema</button>
         </aside>
@@ -51,9 +52,19 @@
             <div id="dashboard-home" class="view-section">
                 <div class="welcome-card">
                     <h2 id="welcome-text"></h2>
-                    <p>Paz do Senhor. Bem-vindo ao sistema de gestão da Comunidade Terapêutica.</p>
+                    <p>Visão geral da unidade de recuperação.</p>
                 </div>
                 <div class="stats-grid" id="stats-area"></div>
+            </div>
+
+            <div id="view-admin-equipe" class="view-section" style="display:none;">
+                <h2>Gestão de Equipe Profissional</h2>
+                <table class="tabela-dados">
+                    <thead>
+                        <tr><th>Nome</th><th>Cargo</th><th>E-mail</th><th>Ações</th></tr>
+                    </thead>
+                    <tbody id="lista-profissionais-tabela"></tbody>
+                </table>
             </div>
 
             <div id="view-acolhidos" class="view-section" style="display:none;">
@@ -63,7 +74,7 @@
                 </div>
                 <table class="tabela-dados">
                     <thead>
-                        <tr><th>Nome</th><th>Idade</th><th>Cidade</th><th>Substância</th><th>Ações</th></tr>
+                        <tr><th>Nome</th><th>Idade</th><th>Substância</th><th>Ações</th></tr>
                     </thead>
                     <tbody id="lista-acolhidos-tabela"></tbody>
                 </table>
@@ -73,61 +84,33 @@
                 <h2>Diário de Bordo</h2>
                 <div class="cards-grid" id="cards-diario-acolhidos"></div>
             </div>
-
             <div id="view-atividades" class="view-section" style="display:none;">
-                <h2>Atividades do Dia</h2>
+                <h2>Atividades</h2>
                 <div class="welcome-card">
-                    <select id="atv-tipo">
-                        <option value="Previnir">Previnir (PPR)</option>
-                        <option value="Psicosocial">Psicossocial</option>
-                        <option value="NA">Narcóticos Anônimos</option>
-                        <option value="Espiritualidade">Espiritualidade</option>
-                    </select>
-                    <button class="btn-add" onclick="adicionarAtividade()">Adicionar</button>
+                    <button class="btn-add" onclick="adicionarAtividade()">+ Simular Atividade</button>
                 </div>
                 <ul id="lista-atividades" class="lista-check"></ul>
             </div>
 
-            <div id="view-psi-agendamentos" class="view-section" style="display:none;">
-                <h2>Agendamentos Clínicos</h2>
-                <div class="welcome-card">
-                    <select id="agendar-acolhido"></select>
-                    <input type="datetime-local" id="agendar-data">
-                    <button class="btn-add" onclick="salvarAgendamento()">Agendar Sessão</button>
-                </div>
-                <ul id="lista-agendamentos" class="lista-check"></ul>
-            </div>
-
             <div id="view-psi-prontuario" class="view-section" style="display:none;">
-                <h2>Evoluções Clínicas</h2>
+                <h2>Prontuários Clínicos</h2>
                 <div class="cards-grid" id="lista-prontuarios"></div>
             </div>
 
             <div id="view-social-familia" class="view-section" style="display:none;">
-                <h2>Contatos Familiares</h2>
-                <div class="welcome-card" style="border-left-color: #e67e22;">
-                    <select id="soc-familia-acolhido"></select>
-                    <textarea id="soc-obs-familia" placeholder="Resumo do contato familiar..."></textarea>
-                    <button class="btn-add" style="background:#e67e22" onclick="salvarContatoSocial()">Gravar Contato</button>
-                </div>
+                <h2>Contatos Sociais/Familiares</h2>
                 <div id="lista-contatos-familia"></div>
-            </div>
-
-            <div id="view-social-documentos" class="view-section" style="display:none;">
-                <h2>Checklist de Documentação</h2>
-                <div class="cards-grid" id="lista-docs-acolhidos"></div>
             </div>
         </main>
     </div>
 
     <div id="modal-acolhido" class="modal">
         <div class="modal-content">
-            <h3>Novo Cadastro de Acolhido</h3>
+            <h3>Novo Cadastro</h3>
             <input type="text" id="ac-nome" placeholder="Nome Completo">
             <input type="number" id="ac-idade" placeholder="Idade">
             <input type="text" id="ac-cidade" placeholder="Cidade">
-            <input type="text" id="ac-droga" placeholder="Substância">
-            <textarea id="ac-ocorrencia" placeholder="Observações de entrada"></textarea>
+            <input type="text" id="ac-droga" placeholder="Substância Principal">
             <div class="modal-buttons">
                 <button onclick="salvarAcolhido()" class="btn-save">Salvar</button>
                 <button onclick="fecharModal('modal-acolhido')" class="btn-cancel">Cancelar</button>
@@ -136,19 +119,16 @@
     </div>
 
     <div id="modal-evolucao" class="modal">
-        <div class="modal-content" style="width: 550px;">
-            <h3 id="evol-nome-acolhido">Prontuário</h3>
-            <textarea id="evol-texto" rows="6" placeholder="Evolução clínica sigilosa..."></textarea>
+        <div class="modal-content">
+            <h3 id="evol-nome-acolhido">Evolução</h3>
+            <textarea id="evol-texto" rows="5" placeholder="Relato clínico..."></textarea>
             <div class="modal-buttons">
-                <button onclick="salvarEvolucaoClinica()" class="btn-save">Salvar Evolução</button>
+                <button onclick="salvarEvolucaoClinica()" class="btn-save">Gravar</button>
                 <button onclick="fecharModal('modal-evolucao')" class="btn-cancel">Fechar</button>
             </div>
-            <h4>Histórico:</h4>
-            <div id="historico-evolucoes" style="max-height: 150px; overflow-y: auto; background: #f9f9f9; padding: 10px;"></div>
         </div>
     </div>
 
     <script src="script.js"></script>
 </body>
 </html>
-
