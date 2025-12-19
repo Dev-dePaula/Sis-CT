@@ -1,7 +1,7 @@
-* { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
-body { background: #f4f7f6; color: #333; }
+* { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', sans-serif; }
+body { background: #f4f7f6; }
 
-/* TELA DE LOGIN MODERNA */
+/* LOGIN ESTILIZADO (FIXED) */
 #auth-screen {
     height: 100vh; display: flex; justify-content: center; align-items: center;
     background: linear-gradient(135deg, #1a252f 0%, #2c3e50 100%);
@@ -11,72 +11,49 @@ body { background: #f4f7f6; color: #333; }
     box-shadow: 0 15px 35px rgba(0,0,0,0.4); text-align: center;
 }
 .auth-box h2 { color: #2c3e50; margin-bottom: 25px; font-size: 24px; font-weight: bold; }
-.auth-box input, .auth-box select {
-    width: 100%; padding: 12px; margin-bottom: 15px; border: 1px solid #ddd;
-    border-radius: 6px; font-size: 15px; outline: none; transition: 0.3s;
-}
-.auth-box input:focus { border-color: #3498db; }
-.btn-primary {
-    width: 100%; padding: 12px; background: #27ae60; color: white; border: none;
-    border-radius: 6px; cursor: pointer; font-weight: bold; font-size: 16px; transition: 0.3s;
-}
-.btn-primary:hover { background: #219150; transform: translateY(-2px); }
+.auth-box input, .auth-box select { width: 100%; padding: 12px; margin-bottom: 15px; border: 1px solid #ddd; border-radius: 6px; }
+.btn-primary { width: 100%; padding: 12px; background: #27ae60; color: white; border: none; border-radius: 6px; cursor: pointer; font-weight: bold; }
 
-/* SIDEBAR & NAVEGAÇÃO */
+/* DASHBOARD */
 #app { display: flex; height: 100vh; }
-#sidebar { width: 260px; background: #1a252f; color: white; display: flex; flex-direction: column; z-index: 100; }
+#sidebar { width: 260px; background: #1a252f; color: white; display: flex; flex-direction: column; }
 .side-header { padding: 30px 20px; text-align: center; background: #141d26; }
 #user-role-badge { background: #e74c3c; font-size: 10px; padding: 3px 10px; border-radius: 20px; text-transform: uppercase; }
 #user-name-display { padding: 15px; text-align: center; border-bottom: 1px solid #34495e; color: #bdc3c7; font-size: 14px; }
-
-#menu-dinamico { list-style: none; flex: 1; padding-top: 15px; }
-#menu-dinamico li {
-    padding: 15px 25px; cursor: pointer; transition: 0.3s; border-left: 4px solid transparent;
-}
-#menu-dinamico li:hover { background: #2c3e50; border-left: 4px solid #3498db; padding-left: 30px; }
-
+#menu-dinamico li { padding: 15px 25px; cursor: pointer; transition: 0.3s; border-left: 4px solid transparent; }
+#menu-dinamico li:hover { background: #2c3e50; border-left: 4px solid #3498db; }
 .btn-logout { background: #c0392b; color: white; border: none; padding: 15px; cursor: pointer; font-weight: bold; }
 
 /* ÁREA PRINCIPAL */
 #main-content { flex: 1; padding: 30px; overflow-y: auto; }
-.top-bar { margin-bottom: 30px; border-bottom: 2px solid #ddd; padding-bottom: 10px; }
-.welcome-card {
-    background: white; padding: 25px; border-radius: 10px; border-left: 6px solid #27ae60;
-    box-shadow: 0 4px 6px rgba(0,0,0,0.05); margin-bottom: 25px;
-}
+.welcome-card { background: white; padding: 25px; border-radius: 10px; border-left: 6px solid #27ae60; box-shadow: 0 4px 6px rgba(0,0,0,0.05); margin-bottom: 25px; }
 
-/* TABELAS DE ESCALA (REFEIÇÃO E LIMPEZA) */
-.tabela-escala { width: 100%; border-collapse: collapse; font-family: Arial, sans-serif; margin-top: 20px; background: white; }
-.tabela-escala thead .azul-header th { background-color: #4fb2e1; color: white; padding: 12px; font-size: 20px; border: 1px solid #ccc; text-transform: uppercase; }
-.tabela-escala thead .amarelo-header th { background-color: #fce76c; color: black; padding: 10px; border: 1px solid #ccc; font-size: 14px; text-transform: uppercase; }
-.tabela-escala td { border: 1px solid #ccc; padding: 12px; text-align: center; font-weight: bold; font-size: 13px; text-transform: uppercase; }
-.tabela-escala tbody tr:nth-child(even) { background-color: #a3d995; } /* Verde escuro */
-.tabela-escala tbody tr:nth-child(odd) { background-color: #c9e9bc; }  /* Verde claro */
+/* TABELAS DE ESCALA (CORES DAS FOTOS) */
+.tabela-escala { width: 100%; border-collapse: collapse; font-family: Arial, sans-serif; margin-top: 20px; }
+.tabela-escala thead .azul-header th { background-color: #4fb2e1; color: white; padding: 12px; font-size: 18px; border: 1px solid #ccc; text-transform: uppercase; }
+.tabela-escala thead .amarelo-header th { background-color: #fce76c; color: black; padding: 10px; border: 1px solid #ccc; font-size: 13px; text-transform: uppercase; }
+.tabela-escala td { border: 1px solid #ccc; padding: 10px; text-align: center; font-weight: bold; font-size: 13px; text-transform: uppercase; }
+.tabela-escala tbody tr:nth-child(even) { background-color: #a3d995; }
+.tabela-escala tbody tr:nth-child(odd) { background-color: #c9e9bc; }
 
-.footer-print { margin-top: 25px; text-align: center; }
-.footer-print h4 { text-decoration: underline; margin-bottom: 12px; font-size: 16px; text-transform: uppercase; font-weight: 800; }
-.footer-print p { font-size: 14px; font-weight: bold; line-height: 1.5; color: #000; }
+.footer-print { margin-top: 20px; text-align: center; font-size: 13px; font-weight: bold; }
 
 /* ELEMENTOS DIVERSOS */
 .stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 20px; }
 .stat-card { background: white; padding: 25px; border-radius: 10px; text-align: center; box-shadow: 0 4px 6px rgba(0,0,0,0.05); }
-.tabela-dados { width: 100%; border-collapse: collapse; background: white; border-radius: 10px; overflow: hidden; box-shadow: 0 4px 6px rgba(0,0,0,0.05); }
+.cards-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 20px; }
+.card-paciente { background: white; padding: 20px; border-radius: 10px; border-top: 5px solid #3498db; box-shadow: 0 4px 6px rgba(0,0,0,0.05); }
+.tabela-dados { width: 100%; border-collapse: collapse; background: white; border-radius: 10px; overflow: hidden; }
 .tabela-dados th { background: #34495e; color: white; padding: 15px; text-align: left; }
 .tabela-dados td { padding: 15px; border-bottom: 1px solid #eee; }
 
-/* MODAIS */
-.modal { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.75); display: none; justify-content: center; align-items: center; z-index: 1000; }
-.modal-content { background: white; padding: 35px; border-radius: 12px; width: 450px; display: flex; flex-direction: column; gap: 15px; }
+/* BOTÕES E IMPRESSÃO */
+.btn-tab { background: #34495e; color: white; padding: 10px 20px; border: none; border-radius: 6px; cursor: pointer; }
+.btn-action { background: #27ae60; color: white; padding: 10px 25px; border: none; border-radius: 6px; cursor: pointer; }
+.btn-print { background: #e67e22; color: white; padding: 10px 25px; border: none; border-radius: 6px; cursor: pointer; }
 
-/* BOTÕES DE ABA E AÇÃO */
-.btn-tab { background: #34495e; color: white; padding: 10px 20px; border: none; border-radius: 6px; cursor: pointer; transition: 0.3s; }
-.btn-tab:hover { background: #2c3e50; }
-.btn-action { background: #27ae60; color: white; padding: 10px 25px; border: none; border-radius: 6px; cursor: pointer; font-weight: bold; }
-.btn-print { background: #e67e22; color: white; padding: 10px 25px; border: none; border-radius: 6px; cursor: pointer; font-weight: bold; }
-
-/* REGRAS DE IMPRESSÃO */
 @media print {
     .no-print, #sidebar, .top-bar { display: none !important; }
     #main-content { padding: 0; }
-    #area-impressao-escala { display: block !important; width: 100%; }
+    #area-impressao-escala { display: block !important; }
 }
