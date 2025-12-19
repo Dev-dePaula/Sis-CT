@@ -1,54 +1,49 @@
 * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', Arial, sans-serif; }
-body { background: #f0f2f5; color: #333; }
+body { background: #f0f2f5; }
 
-/* --- LOGIN --- */
+/* LOGIN */
 #auth-screen {
     height: 100vh; display: flex; justify-content: center; align-items: center;
     background: linear-gradient(135deg, #141d26 0%, #2c3e50 100%);
 }
 .auth-box {
-    background: white; padding: 40px; border-radius: 12px; width: 400px;
-    box-shadow: 0 20px 40px rgba(0,0,0,0.5); text-align: center;
+    background: white; padding: 40px; border-radius: 12px; width: 380px;
+    box-shadow: 0 15px 35px rgba(0,0,0,0.5); text-align: center;
 }
-.auth-box input, .auth-box select {
-    width: 100%; padding: 14px; margin-bottom: 15px; border: 1px solid #dfe6e9;
-    border-radius: 8px; font-size: 15px; background: #f9f9f9;
-}
-.btn-primary {
-    width: 100%; padding: 14px; background: #27ae60; color: white; border: none;
-    border-radius: 8px; cursor: pointer; font-weight: bold; font-size: 16px;
-}
+.auth-box input, .auth-box select { width: 100%; padding: 12px; margin-bottom: 15px; border: 1px solid #ddd; border-radius: 6px; }
+.btn-primary { width: 100%; padding: 12px; background: #27ae60; color: white; border: none; border-radius: 6px; cursor: pointer; font-weight: bold; }
 
-/* --- SIDEBAR --- */
+/* DASHBOARD */
 #app { display: flex; height: 100vh; }
 #sidebar { width: 260px; background: #1a252f; color: white; display: flex; flex-direction: column; }
 .side-header { padding: 30px 20px; text-align: center; background: #141d26; }
 #user-role-badge { background: #e74c3c; font-size: 10px; padding: 4px 10px; border-radius: 20px; text-transform: uppercase; }
-#menu-dinamico li { padding: 15px 25px; cursor: pointer; border-left: 5px solid transparent; transition: 0.3s; }
-#menu-dinamico li:hover { background: #2c3e50; border-left: 5px solid #3498db; }
+.user-welcome { padding: 15px; text-align: center; border-bottom: 1px solid #34495e; color: #bdc3c7; font-size: 14px; }
+#menu-dinamico li { padding: 15px 25px; cursor: pointer; transition: 0.3s; border-left: 4px solid transparent; font-size: 14px; }
+#menu-dinamico li:hover { background: #2c3e50; border-left: 4px solid #3498db; }
 .btn-logout { background: #c0392b; color: white; border: none; padding: 15px; cursor: pointer; font-weight: bold; margin-top: auto; }
 
-/* --- TABELAS DE ESCALA (CORES REFEIÇÃO/LIMPEZA) --- */
-.tabela-escala { width: 100%; border-collapse: collapse; margin-top: 20px; }
-.tabela-escala thead .azul-header th { background-color: #4fb2e1; color: white; padding: 15px; font-size: 22px; border: 1px solid #ccc; text-transform: uppercase; }
-.tabela-escala thead .amarelo-header th { background-color: #fce76c; color: black; padding: 12px; border: 1px solid #ccc; font-size: 14px; text-transform: uppercase; }
+/* CONTEÚDO */
+#main-content { flex: 1; padding: 30px; overflow-y: auto; }
+.welcome-card { background: white; padding: 25px; border-radius: 12px; border-left: 6px solid #27ae60; box-shadow: 0 4px 12px rgba(0,0,0,0.05); margin-bottom: 25px; }
+
+/* TABELAS ESCALA */
+.tabela-escala { width: 100%; border-collapse: collapse; margin-top: 20px; font-family: Arial; }
+.tabela-escala thead .azul-header th { background-color: #4fb2e1; color: white; padding: 15px; border: 1px solid #ccc; text-transform: uppercase; }
+.tabela-escala thead .amarelo-header th { background-color: #fce76c; color: black; padding: 10px; border: 1px solid #ccc; font-size: 13px; text-transform: uppercase; }
 .tabela-escala td { border: 1px solid #ccc; padding: 12px; text-align: center; font-weight: bold; text-transform: uppercase; font-size: 13px; }
 .tabela-escala tbody tr:nth-child(even) { background-color: #a3d995; }
 .tabela-escala tbody tr:nth-child(odd) { background-color: #c9e9bc; }
 
-/* --- GERAL --- */
-#main-content { flex: 1; padding: 30px; overflow-y: auto; }
-.welcome-card { background: white; padding: 25px; border-radius: 12px; border-left: 6px solid #27ae60; box-shadow: 0 4px 12px rgba(0,0,0,0.05); margin-bottom: 25px; }
-.grid-form-escala { display: grid; grid-template-columns: repeat(5, 1fr); gap: 8px; margin-top: 15px; }
-.grid-2-col { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-top: 10px; }
-textarea { width: 100%; padding: 10px; border-radius: 6px; border: 1px solid #ddd; resize: none; }
+/* GERAL */
+.tabela-dados { width: 100%; border-collapse: collapse; background: white; border-radius: 10px; overflow: hidden; }
+.tabela-dados th { background: #34495e; color: white; padding: 15px; text-align: left; }
+.tabela-dados td { padding: 15px; border-bottom: 1px solid #eee; }
+.grid-2-col { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-bottom: 10px; }
+textarea { width: 100%; padding: 10px; border-radius: 6px; border: 1px solid #ddd; resize: none; margin-top: 5px; }
+.btn-action { color: white; padding: 12px 25px; border: none; border-radius: 6px; cursor: pointer; font-weight: bold; margin-top: 10px; }
 .btn-tab { background: #34495e; color: white; padding: 10px 20px; border: none; border-radius: 6px; cursor: pointer; margin-right: 5px; }
-.btn-action { background: #27ae60; color: white; padding: 12px 25px; border: none; border-radius: 6px; cursor: pointer; font-weight: bold; margin-top: 10px; }
-.btn-print { background: #e67e22; color: white; padding: 12px 25px; border: none; border-radius: 6px; cursor: pointer; font-weight: bold; margin-left: 10px; }
-.footer-print { margin-top: 25px; text-align: center; border: 2px solid #333; padding: 15px; background: white; }
 
-@media print {
-    .no-print, #sidebar, .top-bar { display: none !important; }
-    #main-content { padding: 0; }
-    #area-impressao-escala { display: block !important; width: 100%; }
-}
+@media print { .no-print, #sidebar, .top-bar { display: none !important; } #main-content { padding: 0; } #area-impressao-escala { display: block !important; width: 100%; } }
+.modal { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.7); display: none; justify-content: center; align-items: center; z-index: 1000; }
+.modal-content { background: white; padding: 30px; border-radius: 12px; width: 400px; }
