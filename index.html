@@ -17,6 +17,22 @@
             <input type="email" id="login-email" placeholder="E-mail de acesso">
             <input type="password" id="login-senha" placeholder="Senha">
             <button class="btn-primary" onclick="fazerLogin()">ENTRAR</button>
+            <p class="auth-footer">Novo profissional? <a href="#" onclick="alternarAuth('cadastro')">Cadastre-se</a></p>
+        </div>
+
+        <div id="tela-cadastro" class="auth-box" style="display: none;">
+            <h2>CADASTRO PROFISSIONAL</h2>
+            <input type="text" id="cad-nome" placeholder="Nome Completo">
+            <select id="cad-cargo">
+                <option value="educador">Educador / Monitor</option>
+                <option value="psicologa">Psicóloga(o)</option>
+                <option value="social">Assistente Social</option>
+                <option value="admin">Administrador (Diretoria)</option>
+            </select>
+            <input type="email" id="cad-email" placeholder="E-mail">
+            <input type="password" id="cad-senha" placeholder="Criar Senha">
+            <button class="btn-primary" onclick="cadastrarProfissional()">SOLICITAR</button>
+            <p class="auth-footer"><a href="#" onclick="alternarAuth('login')">Voltar ao Login</a></p>
         </div>
     </div>
 
@@ -37,33 +53,53 @@
             </header>
 
             <div id="view-acolhidos" class="view-section" style="display:none;">
-                <div class="section-header"><h2>Acolhidos</h2><button class="btn-add" onclick="abrirModal('modal-acolhido')">+ NOVO</button></div>
+                <div class="section-header"><h2>Acolhidos na Casa</h2><button class="btn-add" onclick="abrirModal('modal-acolhido')">+ NOVO</button></div>
                 <table class="tabela-dados">
-                    <thead><tr><th>Nome</th><th>Ações</th></tr></thead>
+                    <thead><tr><th>Nome</th><th>Idade</th><th>Substância</th><th>Ações</th></tr></thead>
                     <tbody id="lista-acolhidos-tabela"></tbody>
                 </table>
             </div>
 
             <div id="view-atividades" class="view-section" style="display:none;">
                 <div class="no-print">
-                    <button class="btn-tab" onclick="mostrarSubAtividade('refeicao')">Escala Refeição</button>
-                    <button class="btn-tab" onclick="mostrarSubAtividade('limpeza')">Escala Limpeza</button>
+                    <div class="tab-container">
+                        <button class="btn-tab" onclick="mostrarSubAtividade('refeicao')">REFEIÇÕES</button>
+                        <button class="btn-tab" onclick="mostrarSubAtividade('limpeza')">LIMPEZA</button>
+                    </div>
                 </div>
-                <div id="sub-atv-refeicao" style="display:none;"><div id="form-escala-refeicao"></div><button class="btn-print" onclick="imprimirEscala()">Imprimir</button></div>
-                <div id="sub-atv-limpeza" style="display:none;"><div id="form-escala-limpeza"></div><button class="btn-print" onclick="imprimirEscala()">Imprimir</button></div>
+                <div id="sub-atv-refeicao" style="display:none;">
+                    <div class="welcome-card no-print" style="border-left-color: #3498db;">
+                        <div id="form-escala-refeicao" class="grid-form-escala"></div>
+                        <button class="btn-action" onclick="gerarTabelaRefeicao()">VISUALIZAR</button>
+                        <button class="btn-print" onclick="imprimirEscala()">IMPRIMIR</button>
+                    </div>
+                </div>
+                <div id="sub-atv-limpeza" style="display:none;">
+                    <div class="welcome-card no-print" style="border-left-color: #e67e22;">
+                        <div id="form-escala-limpeza"></div>
+                        <button class="btn-action" onclick="gerarTabelaLimpeza()">VISUALIZAR</button>
+                        <button class="btn-print" onclick="imprimirEscala()">IMPRIMIR</button>
+                    </div>
+                </div>
                 <div id="area-impressao-escala"></div>
             </div>
 
             <div id="view-psi-clinico" class="view-section" style="display:none;">
-                <h2 class="no-print">Evolução Psicológica</h2>
-                <div class="welcome-card no-print" style="border-left: 5px solid #9b59b6;">
+                <h2 class="no-print">Evolução Clínica</h2>
+                <div class="welcome-card no-print" style="border-left-color: #9b59b6;">
                     <label>Acolhido:</label>
                     <select id="psi-acolhido-select"></select>
                     <label>Relato da Evolução:</label>
                     <textarea id="psi-relato" rows="6" placeholder="Descreva a evolução..."></textarea>
-                    <button class="btn-action" style="background-color:#9b59b6; color: white;" onclick="gerarEvolucaoOficial()">GERAR DOCUMENTO OFICIAL</button>
+                    <button class="btn-action" style="background-color:#9b59b6; color:white;" onclick="gerarEvolucaoOficial()">GERAR DOCUMENTO OFICIAL</button>
                 </div>
             </div>
+
+            <div id="view-diario" class="view-section" style="display:none;"><div class="cards-grid" id="cards-diario-acolhidos"></div></div>
+            <div id="view-social-anamnese" class="view-section" style="display:none;">
+                <div class="welcome-card"><select id="ana-acolhido-select"></select><textarea id="ana-parecer" rows="4"></textarea><button class="btn-add" onclick="salvarAnamnese()">Salvar</button></div>
+            </div>
+            <div id="view-admin-equipe" class="view-section" style="display:none;"><table class="tabela-dados"><thead><tr><th>Nome</th><th>Cargo</th><th>Ações</th></tr></thead><tbody id="lista-profissionais-tabela"></tbody></table></div>
         </main>
     </div>
 
@@ -90,14 +126,7 @@
         </footer>
     </div>
 
-    <div id="modal-acolhido" class="modal">
-        <div class="modal-content">
-            <h3>Novo Acolhido</h3>
-            <input id="ac-nome" placeholder="Nome Completo">
-            <button onclick="salvarAcolhido()">SALVAR</button>
-            <button onclick="fecharModal('modal-acolhido')">FECHAR</button>
-        </div>
-    </div>
+    <div id="modal-acolhido" class="modal"><div class="modal-content"><h3>Novo Acolhido</h3><input id="ac-nome" placeholder="Nome"><input id="ac-idade" type="number"><input id="ac-droga" placeholder="Substância"><button onclick="salvarAcolhido()">SALVAR</button><button onclick="fecharModal('modal-acolhido')">FECHAR</button></div></div>
 
     <script src="script.js"></script>
 </body>
