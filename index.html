@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sistema CT Sol - Gestão Profissional</title>
+    <title>Sistema CT Sol - Gestão Integrada</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -14,7 +14,7 @@
             <input type="email" id="login-email" placeholder="E-mail" required>
             <input type="password" id="login-senha" placeholder="Senha" required>
             <button class="btn-primary" onclick="fazerLogin()">Entrar</button>
-            <p>Novo por aqui? <a href="#" onclick="alternarAuth('cadastro')">Solicitar Cadastro</a></p>
+            <p>Novo profissional? <a href="#" onclick="alternarAuth('cadastro')">Solicitar Cadastro</a></p>
         </div>
 
         <div id="tela-cadastro" class="auth-box" style="display: none;">
@@ -52,7 +52,7 @@
             <div id="dashboard-home" class="view-section">
                 <div class="welcome-card no-print">
                     <h2 id="welcome-text"></h2>
-                    <p>Paz do Senhor. Gestão Integrada CT Sol.</p>
+                    <p>Paz do Senhor. Gestão Operacional e Clínica.</p>
                 </div>
                 <div id="stats-area" class="stats-grid no-print"></div>
             </div>
@@ -67,25 +67,20 @@
 
             <div id="view-atividades" class="view-section" style="display:none;">
                 <div class="no-print">
-                    <h2>Escalas de Trabalho</h2>
                     <div style="margin-bottom: 20px; display: flex; gap: 10px;">
-                        <button class="btn-tab" onclick="mostrarSubAtividade('refeicao')">Refeições</button>
-                        <button class="btn-tab" onclick="mostrarSubAtividade('limpeza')">Limpeza</button>
+                        <button class="btn-tab" onclick="mostrarSubAtividade('refeicao')">Escala Refeição</button>
+                        <button class="btn-tab" onclick="mostrarSubAtividade('limpeza')">Escala Limpeza</button>
                     </div>
                 </div>
-
                 <div id="sub-atv-refeicao" style="display:none;">
                     <div class="welcome-card no-print" style="border-left-color: #3498db;">
-                        <h3>Preencher Refeições</h3>
                         <div id="form-escala-refeicao"></div>
                         <button class="btn-action" onclick="gerarTabelaRefeicao()">Gerar Tabela</button>
                         <button class="btn-print" onclick="imprimirEscala()">Imprimir</button>
                     </div>
                 </div>
-
                 <div id="sub-atv-limpeza" style="display:none;">
                     <div class="welcome-card no-print" style="border-left-color: #e67e22;">
-                        <h3>Preencher Limpeza</h3>
                         <div id="form-escala-limpeza"></div>
                         <button class="btn-action" onclick="gerarTabelaLimpeza()">Gerar Tabela</button>
                         <button class="btn-print" onclick="imprimirEscala()">Imprimir</button>
@@ -94,14 +89,35 @@
                 <div id="area-impressao-escala"></div>
             </div>
 
-            <div id="view-social-vinculos" class="view-section" style="display:none;">
-                <h2>Vínculos Familiares</h2>
+            <div id="view-social-anamnese" class="view-section" style="display:none;">
+                <h2>Anamnese Social (Entrevista)</h2>
                 <div class="welcome-card no-print" style="border-left-color: #9b59b6;">
-                    <select id="soc-acolhido-select"></select>
-                    <textarea id="soc-contato-texto" rows="3" placeholder="Relato do contato social..."></textarea>
-                    <button class="btn-action" style="background:#9b59b6" onclick="salvarContatoSocial()">Gravar Relato</button>
+                    <label>Acolhido:</label>
+                    <select id="ana-acolhido-select"></select>
+                    
+                    <div class="form-row" style="display:grid; grid-template-columns: 1fr 1fr; gap:15px; margin-top:15px;">
+                        <div>
+                            <label>Composição Familiar:</label>
+                            <textarea id="ana-familia" placeholder="Com quem mora?"></textarea>
+                        </div>
+                        <div>
+                            <label>Situação Profissional:</label>
+                            <input type="text" id="ana-trabalho" placeholder="Último emprego">
+                        </div>
+                        <div>
+                            <label>Renda Mensal:</label>
+                            <input type="text" id="ana-renda" placeholder="Ex: BPC, Bolsa Família">
+                        </div>
+                        <div>
+                            <label>Pendências Jurídicas:</label>
+                            <input type="text" id="ana-justica" placeholder="Processos ou Condicional">
+                        </div>
+                    </div>
+                    <label>Parecer Social / Observações:</label>
+                    <textarea id="ana-parecer" rows="3" placeholder="Avaliação da Assistente Social..."></textarea>
+                    <button class="btn-action" style="background:#9b59b6" onclick="salvarAnamnese()">Salvar Anamnese</button>
                 </div>
-                <div id="historico-social"></div>
+                <div id="historico-anamnese"></div>
             </div>
 
             <div id="view-social-docs" class="view-section" style="display:none;">
