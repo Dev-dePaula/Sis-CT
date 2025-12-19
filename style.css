@@ -1,83 +1,47 @@
 * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', sans-serif; }
 body { background: #f4f7f6; }
 
-/* --- TELA DE LOGIN PROFISSIONAL --- */
+/* LOGIN ESTILIZADO */
 #auth-screen {
-    height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    height: 100vh; display: flex; justify-content: center; align-items: center;
     background: linear-gradient(135deg, #1a252f 0%, #2c3e50 100%);
 }
-
 .auth-box {
-    background: white;
-    padding: 40px;
-    border-radius: 12px;
-    width: 380px;
-    box-shadow: 0 15px 35px rgba(0,0,0,0.4);
-    text-align: center;
+    background: white; padding: 40px; border-radius: 12px; width: 380px;
+    box-shadow: 0 15px 35px rgba(0,0,0,0.4); text-align: center;
 }
+.auth-box input, .auth-box select { width: 100%; padding: 12px; margin-bottom: 15px; border: 1px solid #ddd; border-radius: 6px; }
+.btn-primary { width: 100%; padding: 12px; background: #27ae60; color: white; border: none; border-radius: 6px; cursor: pointer; font-weight: bold; }
 
-.auth-box h2 { color: #2c3e50; margin-bottom: 25px; font-size: 24px; }
-.auth-box input, .auth-box select {
-    width: 100%;
-    padding: 12px;
-    margin-bottom: 15px;
-    border: 1px solid #ddd;
-    border-radius: 6px;
-    font-size: 15px;
-}
-
-.btn-primary {
-    width: 100%;
-    padding: 12px;
-    background: #27ae60;
-    color: white;
-    border: none;
-    border-radius: 6px;
-    cursor: pointer;
-    font-weight: bold;
-    font-size: 16px;
-    transition: 0.3s;
-}
-.btn-primary:hover { background: #219150; }
-
-/* --- DASHBOARD & SIDEBAR --- */
+/* DASHBOARD */
 #app { display: flex; height: 100vh; }
 #sidebar { width: 250px; background: #1a252f; color: white; display: flex; flex-direction: column; }
 .side-header { padding: 25px; text-align: center; background: #141d26; }
-#user-role-badge { background: #e74c3c; font-size: 10px; padding: 3px 8px; border-radius: 10px; }
+#user-role-badge { background: #e74c3c; font-size: 10px; padding: 2px 8px; border-radius: 10px; }
 #menu-dinamico li { padding: 15px 20px; cursor: pointer; border-left: 4px solid transparent; }
 #menu-dinamico li:hover { background: #34495e; border-left: 4px solid #3498db; }
 #main-content { flex: 1; padding: 25px; overflow-y: auto; }
 
-/* --- TABELAS DE ESCALA (MODELO IMAGENS) --- */
+/* TABELAS DE ESCALA (MODELO REFEIÇÃO E LIMPEZA) */
 .tabela-escala { width: 100%; border-collapse: collapse; font-family: Arial, sans-serif; }
-.tabela-escala thead .azul-header th { background-color: #4fb2e1; color: white; padding: 12px; font-size: 20px; border: 1px solid #ccc; text-transform: uppercase; }
-.tabela-escala thead .amarelo-header th { background-color: #fce76c; color: black; padding: 10px; border: 1px solid #ccc; font-size: 14px; text-transform: uppercase; }
-
+.tabela-escala thead .azul-header th { background-color: #4fb2e1; color: white; padding: 12px; font-size: 18px; border: 1px solid #ccc; text-transform: uppercase; }
+.tabela-escala thead .amarelo-header th { background-color: #fce76c; color: black; padding: 10px; border: 1px solid #ccc; font-size: 13px; text-transform: uppercase; }
 .tabela-escala td { border: 1px solid #ccc; padding: 10px; text-align: center; font-weight: bold; font-size: 13px; text-transform: uppercase; }
 .tabela-escala tbody tr:nth-child(even) { background-color: #a3d995; } /* Verde escuro */
 .tabela-escala tbody tr:nth-child(odd) { background-color: #c9e9bc; }  /* Verde claro */
 
-/* Rodapé das Escalas */
-.footer-print { margin-top: 20px; text-align: center; padding: 10px; }
-.footer-print h4 { text-decoration: underline; margin-bottom: 10px; font-size: 16px; text-transform: uppercase; }
-.footer-print p { font-size: 13px; margin-bottom: 10px; line-height: 1.4; font-weight: bold; }
+.footer-print { margin-top: 20px; text-align: center; }
+.footer-print h4 { text-decoration: underline; margin-bottom: 10px; font-size: 15px; text-transform: uppercase; }
+.footer-print p { font-size: 13px; font-weight: bold; line-height: 1.4; }
 
-/* Botões de Ação */
+/* BOTÕES */
 .btn-tab { background: #34495e; color: white; padding: 8px 15px; border: none; border-radius: 4px; cursor: pointer; }
 .btn-action { background: #27ae60; color: white; padding: 10px 20px; border: none; border-radius: 5px; cursor: pointer; }
 .btn-print { background: #e67e22; color: white; padding: 10px 20px; border: none; border-radius: 5px; cursor: pointer; }
 
-/* Impressão */
+/* IMPRESSÃO */
 @media print {
     .no-print, #sidebar, .top-bar { display: none !important; }
     #main-content { padding: 0; }
     #area-impressao-escala { display: block !important; }
 }
-
-/* Modais */
-.modal { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.7); display: none; justify-content: center; align-items: center; z-index: 1000; }
-.modal-content { background: white; padding: 25px; border-radius: 10px; width: 400px; }
