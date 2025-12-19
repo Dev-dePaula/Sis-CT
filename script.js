@@ -1,26 +1,25 @@
-/* CONTROLE DE ACESSO */
+/* AUTH */
 function fazerLogin() {
     const e = document.getElementById('login-email').value, s = document.getElementById('login-senha').value;
     const users = JSON.parse(localStorage.getItem('usuarios-ct')) || [];
     const u = users.find(x => x.email === e && x.senha === s);
     if (u) { document.getElementById('auth-screen').style.display = 'none'; document.getElementById('app').style.display = 'flex'; carregarDashboard(u); }
-    else alert("Usuário não encontrado.");
+    else alert("Login inválido.");
 }
 
 function carregarDashboard(u) {
     document.getElementById('user-name-display').innerText = u.nome;
     document.getElementById('user-role-badge').innerText = u.cargo;
     const m = document.getElementById('menu-dinamico');
-    const totalA = (JSON.parse(localStorage.getItem('acolhidos-ct')) || []).length;
-
     m.innerHTML = `<li onclick="mudarTela('home')">Início</li><li onclick="mudarTela('acolhidos')">Acolhidos</li>`;
     
     if (u.cargo === 'educador' || u.cargo === 'admin') {
         m.innerHTML += `<li onclick="mudarTela('diario')">Diário</li><li onclick="mudarTela('atividades')">Escalas</li><li onclick="mudarTela('plantao')">Plantão</li>`;
     }
     if (u.cargo === 'psicologa' || u.cargo === 'admin') m.innerHTML += `<li onclick="mudarTela('psi-prontuario')">Prontuários</li>`;
-    if (u.cargo === 'social' || u.cargo === 'admin') m.innerHTML += `<li onclick="mudarTela('social-vinculos')">Vínculos Sociais</li><li onclick="mudarTela('social-docs')">Documentos</li>`;
-    
+    if (u.cargo === 'social' || u.cargo === 'admin') {
+        m.innerHTML += `<li onclick="mudarTela('social-anamnese')">Anamnese Social</li><li onclick="mudarTela('social-docs')">Documentos</li>`;
+    }
     carregarDadosBase();
 }
 
@@ -29,10 +28,10 @@ function mudarTela(t) {
     const id = (t === 'home') ? 'dashboard-home' : 'view-' + t;
     document.getElementById(id).style.display = 'block';
     if(t === 'atividades') mostrarSubAtividade('refeicao');
-    if(t === 'social-vinculos') carregarSocialAcolhidos();
+    if(t === 'social-anamnese') carregarSocialAcolhidos();
 }
 
-/* GERADORES DE ESCALA */
+/* ESCALAS (MODELO FOTOS) */
 function mostrarSubAtividade(aba) {
     document.getElementById('sub-atv-refeicao').style.display = (aba === 'refeicao') ? 'block' : 'none';
     document.getElementById('sub-atv-limpeza').style.display = (aba === 'limpeza') ? 'block' : 'none';
@@ -52,28 +51,28 @@ function carregarFormRefeicao() {
 function gerarTabelaRefeicao() {
     const dias = ["SEGUNDA", "TERÇA", "QUARTA", "QUINTA", "SEXTA", "SÁBADO", "DOMINGO"];
     let rows = dias.map(d => `<tr><td>${d}</td><td>${document.getElementById(`ref-${d}-0`).value}</td><td>${document.getElementById(`ref-${d}-1`).value}</td><td>${document.getElementById(`ref-${d}-2`).value}</td><td>${document.getElementById(`ref-${d}-3`).value}</td></tr>`).join('');
-    document.getElementById('area-impressao-escala').innerHTML = `<table class="tabela-escala"><thead><tr class="azul-header"><th colspan="5">PREPARO DAS REFEIÇÕES DIÁRIAS</th></tr><tr class="amarelo-header"><th>DIA</th><th>ALMOÇO</th><th>APOIO</th><th>JANTAR</th><th>APOIO</th></tr></thead><tbody>${rows}</tbody></table><div class="footer-print"><p>SE NO DIA DA SUA ESCALA VOCÊ NÃO ESTIVER OU NÃO PUDER, COMUNIQUE UM COLEGA E PEÇA A TROCA DO DIA. COMUNICAÇÃO É O PRINCÍPIO DO NOSSO ESTAR SÓBRIO.</p></div>`;
+    document.getElementById('area-impressao-escala').innerHTML = `<table class="tabela-escala"><thead><tr class="azul-header"><th colspan="5">PREPARO DAS REFEIÇÕES DIÁRIAS</th></tr><tr class="amarelo-header"><th>DIA</th><th>ALMOÇO</th><th>APOIO</th><th>JANTAR</th><th>APOIO</th></tr></thead><tbody>${rows}</tbody></table>`;
 }
 
 function carregarFormLimpeza() {
     const acolhidos = JSON.parse(localStorage.getItem('acolhidos-ct')) || [];
     const options = acolhidos.map(a => `<option>${a.nome}</option>`).join('');
-    const setores = ["SALA/TV", "COPA", "COZINHA", "EXTERNA", "QUINTAL", "BANHEIRO 1", "BANHEIRO 2"];
+    const setores = ["SALA/TV", "COPA", "COZINHA", "EXTERNA", "QUINTAL"];
     let html = `<div style="display:grid; grid-template-columns: 1fr 1fr; gap:10px;"><b>SETOR</b><b>RESPONSÁVEL</b>`;
     setores.forEach(s => html += `<div>${s}</div><select id="limp-${s}">${options}</select>`);
     document.getElementById('form-escala-limpeza').innerHTML = html + `</div>`;
 }
 
 function gerarTabelaLimpeza() {
-    const setores = ["SALA/TV", "COPA", "COZINHA", "EXTERNA", "QUINTAL", "BANHEIRO 1", "BANHEIRO 2"];
-    let rows = setores.map(s => `<tr><td>${s}</td><td>${document.getElementById(`limp-${s}`).value}</td><td>Limpeza Geral conforme Manual</td></tr>`).join('');
-    document.getElementById('area-impressao-escala').innerHTML = `<table class="tabela-escala"><thead><tr class="azul-header"><th colspan="3">LIMPEZA SEMANAL & FAXINÃO</th></tr><tr class="amarelo-header"><th>LOCAL</th><th>RESPONSÁVEL</th><th>TAREFA</th></tr></thead><tbody>${rows}</tbody></table><div class="footer-print"><p>MANTER A LIMPEZA DURANTE A SEMANA É RESPONSABILIDADE DE TODOS.</p></div>`;
+    const setores = ["SALA/TV", "COPA", "COZINHA", "EXTERNA", "QUINTAL"];
+    let rows = setores.map(s => `<tr><td>${s}</td><td>${document.getElementById(`limp-${s}`).value}</td><td>Limpeza Geral</td></tr>`).join('');
+    document.getElementById('area-impressao-escala').innerHTML = `<table class="tabela-escala"><thead><tr class="azul-header"><th colspan="3">LIMPEZA SEMANAL & FAXINÃO</th></tr><tr class="amarelo-header"><th>LOCAL</th><th>RESPONSÁVEL</th><th>TAREFA</th></tr></thead><tbody>${rows}</tbody></table>`;
 }
 
 /* FUNÇÕES SOCIAIS */
 function carregarSocialAcolhidos() {
     const acolhidos = JSON.parse(localStorage.getItem('acolhidos-ct')) || [];
-    document.getElementById('soc-acolhido-select').innerHTML = acolhidos.map(x => `<option>${x.nome}</option>`).join('');
+    document.getElementById('ana-acolhido-select').innerHTML = acolhidos.map(x => `<option>${x.nome}</option>`).join('');
     document.getElementById('lista-docs-social').innerHTML = acolhidos.map(x => `
         <div class="card-paciente" style="border-top-color:#e67e22">
             <h4>${x.nome}</h4>
@@ -84,11 +83,12 @@ function carregarSocialAcolhidos() {
         </div>`).join('');
 }
 
-function salvarContatoSocial() {
-    const nome = document.getElementById('soc-acolhido-select').value;
-    const txt = document.getElementById('soc-contato-texto').value;
-    document.getElementById('historico-social').innerHTML += `<div class="welcome-card" style="border-left-color:#9b59b6"><strong>${nome}:</strong> ${txt}</div>`;
-    document.getElementById('soc-contato-texto').value = "";
+function salvarAnamnese() {
+    const nome = document.getElementById('ana-acolhido-select').value;
+    const familia = document.getElementById('ana-familia').value;
+    const parecer = document.getElementById('ana-parecer').value;
+    document.getElementById('historico-anamnese').innerHTML += `<div class="welcome-card" style="border-left-color:#9b59b6"><strong>${nome}:</strong> ${parecer}</div>`;
+    alert("Anamnese Social salva!");
 }
 
 /* GERAL */
