@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sistema CT Sol - Gestão Profissional</title>
+    <title>Sistema CT Sol - Escala de Refeições</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -52,17 +52,9 @@
             <div id="dashboard-home" class="view-section">
                 <div class="welcome-card">
                     <h2 id="welcome-text"></h2>
-                    <p>Paz do Senhor. Bem-vindo à gestão da Comunidade Terapêutica Sol.</p>
+                    <p>Paz do Senhor. Bem-vindo à gestão da CT Sol.</p>
                 </div>
                 <div class="stats-grid" id="stats-area"></div>
-            </div>
-
-            <div id="view-admin-equipe" class="view-section" style="display:none;">
-                <h2>Gestão de Equipe</h2>
-                <table class="tabela-dados">
-                    <thead><tr><th>Nome</th><th>Cargo</th><th>E-mail</th><th>Ações</th></tr></thead>
-                    <tbody id="lista-profissionais-tabela"></tbody>
-                </table>
             </div>
 
             <div id="view-acolhidos" class="view-section" style="display:none;">
@@ -71,78 +63,39 @@
                     <button class="btn-add" onclick="abrirModal('modal-acolhido')">+ Novo Acolhido</button>
                 </div>
                 <table class="tabela-dados">
-                    <thead><tr><th>Nome</th><th>Idade</th><th>Substância</th><th>Ações</th></tr></thead>
+                    <thead><tr><th>Nome</th><th>Ações</th></tr></thead>
                     <tbody id="lista-acolhidos-tabela"></tbody>
                 </table>
             </div>
 
-            <div id="view-diario" class="view-section" style="display:none;">
-                <h2>Diário de Bordo</h2>
-                <div class="cards-grid" id="cards-diario-acolhidos"></div>
-            </div>
-            
-            <div id="view-plantao" class="view-section" style="display:none;">
-                <h2>Passagem de Plantão</h2>
-                <div class="welcome-card">
-                    <textarea id="plantao-texto" rows="4" placeholder="Descreva as ocorrências do turno..."></textarea>
-                    <button class="btn-add" onclick="salvarPlantao()">Gravar Plantão</button>
-                </div>
-                <div id="historico-plantoes"></div>
-            </div>
-
-            <div id="view-medicamentos" class="view-section" style="display:none;">
-                <h2>Supervisão de Medicação</h2>
-                <div id="lista-medicao-acolhidos"></div>
-            </div>
-
-            <div id="view-atividades" class="view-section" style="display:none;">
-                <h2>Atividades e Escalas Profissionais</h2>
-                <div style="margin-bottom: 20px; display: flex; gap: 10px;">
-                    <button class="btn-add" onclick="mostrarSubAtividade('lista')">Checklist Diário</button>
-                    <button class="btn-add" style="background:#3498db" onclick="mostrarSubAtividade('gerador')">Gerador de Escalas</button>
-                </div>
-
-                <div id="sub-atv-lista">
-                    <ul id="lista-atividades" class="lista-check"></ul>
-                </div>
-
-                <div id="sub-atv-gerador" style="display:none;">
-                    <div class="welcome-card" style="border-left-color: #3498db;">
-                        <h3>Configurar Escala Diária </h3>
-                        <select id="escala-tipo" onchange="ajustarCamposEscala()">
-                            <option value="refeicao">Escala de Refeições </option>
-                            <option value="limpeza">Escala de Limpeza</option>
-                        </select>
-                        <button class="btn-add" style="background:#27ae60" onclick="gerarTabelaEscala()">Gerar Prévia</button>
-                        <button class="btn-add" style="background:#e67e22" onclick="imprimirEscala()">Baixar / Imprimir PDF </button>
+            <div id="view-escala-refeicao" class="view-section" style="display:none;">
+                <h2 class="no-print">Gerador de Escala de Refeições</h2>
+                
+                <div class="welcome-card no-print" style="border-left-color: #3498db;">
+                    <h3>1. Preencher Responsáveis</h3>
+                    <p>Selecione os acolhidos para cada turno da semana.</p>
+                    <div id="form-preenchimento-escala">
+                        </div>
+                    <div style="margin-top: 20px; display: flex; gap: 10px;">
+                        <button class="btn-add" style="background:#27ae60" onclick="gerarTabelaRefeicao()">Visualizar Tabela</button>
+                        <button class="btn-add" style="background:#e67e22" onclick="imprimirEscala()">Imprimir / PDF</button>
                     </div>
-                    <div id="form-preenchimento-escala" class="welcome-card"></div>
-                    <div id="area-impressao-escala"></div>
                 </div>
-            </div>
 
-            <div id="view-psi-agendamentos" class="view-section" style="display:none;">
-                <h2>Agenda Clínica</h2>
-                <div id="lista-agendamentos" class="lista-check"></div>
-            </div>
-            <div id="view-psi-prontuario" class="view-section" style="display:none;">
-                <h2>Prontuários</h2>
-                <div class="cards-grid" id="lista-prontuarios"></div>
-            </div>
-
-            <div id="view-social-familia" class="view-section" style="display:none;">
-                <h2>Vínculos Familiares</h2>
-                <div id="lista-contatos-familia"></div>
-            </div>
-            <div id="view-social-documentos" class="view-section" style="display:none;">
-                <h2>Documentação</h2>
-                <div class="cards-grid" id="lista-docs-acolhidos"></div>
+                <div id="area-impressao-escala">
+                    </div>
             </div>
         </main>
     </div>
 
-    <div id="modal-acolhido" class="modal"><div class="modal-content"><h3>Novo Acolhido</h3><input id="ac-nome" placeholder="Nome"><input id="ac-idade" type="number"><input id="ac-droga" placeholder="Droga"><button onclick="salvarAcolhido()">Salvar</button><button onclick="fecharModal('modal-acolhido')">Fechar</button></div></div>
-    <div id="modal-evolucao" class="modal"><div class="modal-content"><h3 id="evol-nome-acolhido"></h3><textarea id="evol-texto" rows="5" placeholder="Evolução técnica..."></textarea><button onclick="salvarEvolucaoClinica()">Gravar</button><button onclick="fecharModal('modal-evolucao')">Fechar</button></div></div>
+    <div id="modal-acolhido" class="modal">
+        <div class="modal-content">
+            <h3>Cadastrar Acolhido</h3>
+            <input type="text" id="ac-nome" placeholder="Nome Completo">
+            <button onclick="salvarAcolhido()">Salvar</button>
+            <button onclick="fecharModal('modal-acolhido')">Fechar</button>
+        </div>
+    </div>
 
     <script src="script.js"></script>
 </body>
