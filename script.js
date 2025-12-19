@@ -1,34 +1,37 @@
-/* AUTH */
+/* CONTROLE DE ACESSO */
 function fazerLogin() {
     const e = document.getElementById('login-email').value, s = document.getElementById('login-senha').value;
     const users = JSON.parse(localStorage.getItem('usuarios-ct')) || [];
     const u = users.find(x => x.email === e && x.senha === s);
     if (u) { document.getElementById('auth-screen').style.display = 'none'; document.getElementById('app').style.display = 'flex'; carregarDashboard(u); }
-    else alert("E-mail ou senha incorretos.");
+    else alert("Login inválido.");
 }
 
 function carregarDashboard(u) {
     document.getElementById('user-name-display').innerText = u.nome;
     document.getElementById('user-role-badge').innerText = u.cargo;
-    const m = document.getElementById('menu-dinamico'), s = document.getElementById('stats-area');
-    const totalA = (JSON.parse(localStorage.getItem('acolhidos-ct')) || []).length;
+    const m = document.getElementById('menu-dinamico');
     m.innerHTML = `<li onclick="mudarTela('home')">Início</li><li onclick="mudarTela('acolhidos')">Acolhidos</li>`;
+    
     if (u.cargo === 'educador' || u.cargo === 'admin') {
-        m.innerHTML += `<li onclick="mudarTela('diario')">Diário</li><li onclick="mudarTela('atividades')">Atividades/Escalas</li><li onclick="mudarTela('plantao')">Plantão</li>`;
+        m.innerHTML += `<li onclick="mudarTela('diario')">Diário</li><li onclick="mudarTela('plantao')">Plantão</li><li onclick="mudarTela('atividades')">Atividades/Escalas</li><li onclick="mudarTela('medicamentos')">Medicamentos</li>`;
     }
     if (u.cargo === 'psicologa' || u.cargo === 'admin') m.innerHTML += `<li onclick="mudarTela('psi-prontuario')">Prontuários</li>`;
+    if (u.cargo === 'social' || u.cargo === 'admin') {
+        m.innerHTML += `<li onclick="mudarTela('social-vinculos')">Vínculos Familiares</li><li onclick="mudarTela('social-docs')">Documentação</li>`;
+    }
     if (u.cargo === 'admin') m.innerHTML += `<li onclick="mudarTela('admin-equipe')">Gerenciar Equipe</li>`;
     carregarDadosBase();
 }
 
 function mudarTela(t) {
     document.querySelectorAll('.view-section').forEach(x => x.style.display = 'none');
-    const id = (t === 'home') ? 'dashboard-home' : 'view-' + t;
-    document.getElementById(id).style.display = 'block';
+    document.getElementById('view-' + t.replace('home', 'dashboard-home')).style.display = 'block';
     if(t === 'atividades') mostrarSubAtividade('refeicao');
+    if(t === 'social-vinculos') carregarSocialAcolhidos();
 }
 
-/* ESCALAS */
+/* ESCALAS (MODELO FOTOS) */
 function mostrarSubAtividade(aba) {
     document.getElementById('sub-atv-refeicao').style.display = (aba === 'refeicao') ? 'block' : 'none';
     document.getElementById('sub-atv-limpeza').style.display = (aba === 'limpeza') ? 'block' : 'none';
@@ -66,11 +69,37 @@ function gerarTabelaLimpeza() {
     document.getElementById('area-impressao-escala').innerHTML = `<table class="tabela-escala"><thead><tr class="azul-header"><th colspan="3">LIMPEZA SEMANAL & FAXINÃO</th></tr><tr class="amarelo-header"><th>LOCAL</th><th>RESPONSÁVEL</th><th>TAREFA</th></tr></thead><tbody>${rows}</tbody></table><div class="footer-print"><h4>PARA OS QUE TRABALHAM</h4><p>FICA A RESPONSABILIDADE DE CUMPRIR SUA TAREFA DEPOIS DO EXPEDIENTE DE TRABALHO.</p><h4>LIMPEZA DOS QUARTOS</h4><p>ARRUMAR AS CAMAS COM LENÇOL, COBRE LEITO E TRAVESSEIRO.</p></div>`;
 }
 
+/* FUNÇÕES SOCIAIS */
+function carregarSocialAcolhidos() {
+    const acolhidos = JSON.parse(localStorage.getItem('acolhidos-ct')) || [];
+    document.getElementById('social-acolhido-select').innerHTML = acolhidos.map(x => `<option>${x.nome}</option>`).join('');
+    document.getElementById('lista-docs-social').innerHTML = acolhidos.map(x => `
+        <div class="card-paciente" style="border-top-color:#e67e22">
+            <h4>${x.nome}</h4>
+            <label><input type="checkbox"> RG</label><br>
+            <label><input type="checkbox"> CPF</label><br>
+            <label><input type="checkbox"> Título</label><br>
+            <label><input type="checkbox"> SUS</label>
+            <button onclick="alert('Docs de ${x.nome} atualizados!')" style="width:100%; margin-top:10px;">Salvar</button>
+        </div>`).join('');
+}
+
+function salvarContatoSocial() {
+    const acolhido = document.getElementById('social-acolhido-select').value;
+    const txt = document.getElementById('social-contato-texto').value;
+    const lista = document.getElementById('historico-social-contatos');
+    lista.innerHTML += `<div class="welcome-card" style="border-left-color:#9b59b6"><strong>${acolhido}:</strong> ${txt}</div>`;
+    document.getElementById('social-contato-texto').value = "";
+    alert("Contato registrado!");
+}
+
 /* GERAL */
 function carregarDadosBase() {
     const acolhidos = JSON.parse(localStorage.getItem('acolhidos-ct')) || [];
     document.getElementById('lista-acolhidos-tabela').innerHTML = acolhidos.map(x => `<tr><td>${x.nome}</td><td>${x.idade}</td><td>${x.droga}</td><td>---</td></tr>`).join('');
+    if(document.getElementById('cards-diario-acolhidos')) document.getElementById('cards-diario-acolhidos').innerHTML = acolhidos.map(x => `<div class="card-paciente"><h4>${x.nome}</h4><textarea></textarea><button>Gravar</button></div>`).join('');
 }
+
 function salvarAcolhido() {
     const ac = { nome: document.getElementById('ac-nome').value, idade: document.getElementById('ac-idade').value, droga: document.getElementById('ac-droga').value };
     let l = JSON.parse(localStorage.getItem('acolhidos-ct')) || [];
