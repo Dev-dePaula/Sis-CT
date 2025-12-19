@@ -56,12 +56,12 @@
 
             <div id="view-psi-clinico" class="view-section" style="display:none;">
                 <h2 class="no-print">Evolução Psicológica</h2>
-                <div class="welcome-card no-print" style="border-left-color: #9b59b6;">
+                <div class="welcome-card no-print" style="border-left: 5px solid #9b59b6;">
                     <label>Acolhido:</label>
                     <select id="psi-acolhido-select"></select>
                     <label>Relato da Evolução:</label>
                     <textarea id="psi-relato" rows="6" placeholder="Descreva a evolução..."></textarea>
-                    <button class="btn-action" style="background:#9b59b6" onclick="gerarEvolucaoOficial()">GERAR DOCUMENTO OFICIAL</button>
+                    <button class="btn-action" style="background-color:#9b59b6; color: white;" onclick="gerarEvolucaoOficial()">GERAR DOCUMENTO OFICIAL</button>
                 </div>
             </div>
         </main>
@@ -90,7 +90,14 @@
         </footer>
     </div>
 
-    <div id="modal-acolhido" class="modal"><div class="modal-content"><h3>Novo Acolhido</h3><input id="ac-nome" placeholder="Nome Completo"><button onclick="salvarAcolhido()">SALVAR</button><button onclick="fecharModal('modal-acolhido')">FECHAR</button></div></div>
+    <div id="modal-acolhido" class="modal">
+        <div class="modal-content">
+            <h3>Novo Acolhido</h3>
+            <input id="ac-nome" placeholder="Nome Completo">
+            <button onclick="salvarAcolhido()">SALVAR</button>
+            <button onclick="fecharModal('modal-acolhido')">FECHAR</button>
+        </div>
+    </div>
 
     <script src="script.js"></script>
 </body>
