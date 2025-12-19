@@ -1,49 +1,81 @@
-* { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', sans-serif; }
-body { background: #f4f7f6; }
+* { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', Arial, sans-serif; }
+body { background: #f0f2f5; color: #333; }
 
-/* TELA DE LOGIN (ESTILO SOFTWARE PROFISSIONAL) */
+/* --- TELA DE LOGIN --- */
 #auth-screen {
     height: 100vh; display: flex; justify-content: center; align-items: center;
-    background: linear-gradient(135deg, #1a252f 0%, #2c3e50 100%);
+    background: linear-gradient(135deg, #141d26 0%, #2c3e50 100%);
 }
 .auth-box {
-    background: white; padding: 40px; border-radius: 12px; width: 380px;
-    box-shadow: 0 15px 35px rgba(0,0,0,0.4); text-align: center;
+    background: white; padding: 40px; border-radius: 12px; width: 400px;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.5); text-align: center;
 }
-.auth-box h2 { color: #2c3e50; margin-bottom: 25px; font-weight: bold; }
-.auth-box input, .auth-box select { width: 100%; padding: 12px; margin-bottom: 15px; border: 1px solid #ddd; border-radius: 6px; }
-.btn-primary { width: 100%; padding: 12px; background: #27ae60; color: white; border: none; border-radius: 6px; cursor: pointer; font-weight: bold; transition: 0.3s; }
-.btn-primary:hover { background: #219150; }
+.auth-header h2 { font-size: 26px; color: #2c3e50; font-weight: 800; letter-spacing: -1px; }
+.auth-header p { font-size: 13px; color: #7f8c8d; margin-bottom: 30px; }
 
-/* SIDEBAR */
+.auth-box input, .auth-box select {
+    width: 100%; padding: 14px; margin-bottom: 15px; border: 1px solid #dfe6e9;
+    border-radius: 8px; font-size: 15px; background: #f9f9f9; transition: 0.3s;
+}
+.auth-box input:focus { border-color: #3498db; background: #fff; box-shadow: 0 0 8px rgba(52,152,219,0.2); }
+
+.btn-primary {
+    width: 100%; padding: 14px; background: #27ae60; color: white; border: none;
+    border-radius: 8px; cursor: pointer; font-weight: bold; font-size: 16px; transition: 0.3s;
+}
+.btn-primary:hover { background: #219150; transform: translateY(-2px); }
+.auth-footer { margin-top: 20px; font-size: 13px; }
+.auth-footer a { color: #3498db; text-decoration: none; font-weight: bold; }
+
+/* --- SIDEBAR & DASHBOARD --- */
+#app { display: flex; height: 100vh; }
 #sidebar { width: 260px; background: #1a252f; color: white; display: flex; flex-direction: column; }
 .side-header { padding: 30px 20px; text-align: center; background: #141d26; }
-#user-role-badge { background: #e74c3c; font-size: 10px; padding: 3px 10px; border-radius: 20px; }
-#menu-dinamico li { padding: 15px 25px; cursor: pointer; transition: 0.3s; border-left: 4px solid transparent; }
-#menu-dinamico li:hover { background: #2c3e50; border-left: 4px solid #3498db; }
+#user-role-badge { background: #e74c3c; font-size: 10px; padding: 4px 10px; border-radius: 20px; text-transform: uppercase; font-weight: bold; }
+.user-welcome { padding: 15px; text-align: center; font-size: 14px; color: #bdc3c7; border-bottom: 1px solid #34495e; }
 
-/* TABELAS DE ESCALA (CORES DAS FOTOS) */
-.tabela-escala { width: 100%; border-collapse: collapse; font-family: Arial, sans-serif; margin-top: 20px; }
-.tabela-escala thead .azul-header th { background-color: #4fb2e1; color: white; padding: 12px; font-size: 18px; border: 1px solid #ccc; text-transform: uppercase; }
-.tabela-escala thead .amarelo-header th { background-color: #fce76c; color: black; padding: 10px; border: 1px solid #ccc; font-size: 13px; text-transform: uppercase; }
-.tabela-escala td { border: 1px solid #ccc; padding: 10px; text-align: center; font-weight: bold; font-size: 13px; text-transform: uppercase; }
-.tabela-escala tbody tr:nth-child(even) { background-color: #a3d995; }
-.tabela-escala tbody tr:nth-child(odd) { background-color: #c9e9bc; }
+#menu-dinamico li {
+    padding: 15px 25px; cursor: pointer; transition: 0.3s; border-left: 5px solid transparent; font-size: 14px;
+}
+#menu-dinamico li:hover { background: #2c3e50; border-left: 5px solid #3498db; padding-left: 30px; }
+.btn-logout { background: #c0392b; color: white; border: none; padding: 15px; cursor: pointer; font-weight: bold; margin-top: auto; }
 
-/* GERAL */
+/* --- CONTEÚDO --- */
 #main-content { flex: 1; padding: 30px; overflow-y: auto; }
-.welcome-card { background: white; padding: 25px; border-radius: 10px; border-left: 6px solid #27ae60; box-shadow: 0 4px 6px rgba(0,0,0,0.05); margin-bottom: 25px; }
-.cards-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 20px; }
-.card-paciente { background: white; padding: 20px; border-radius: 10px; border-top: 5px solid #3498db; box-shadow: 0 4px 6px rgba(0,0,0,0.05); }
-.tabela-dados { width: 100%; border-collapse: collapse; background: white; border-radius: 10px; overflow: hidden; }
-.tabela-dados th { background: #34495e; color: white; padding: 15px; text-align: left; }
-.tabela-dados td { padding: 15px; border-bottom: 1px solid #eee; }
-.btn-tab { background: #34495e; color: white; padding: 8px 15px; border: none; border-radius: 4px; cursor: pointer; }
-.btn-action { background: #27ae60; color: white; padding: 10px 25px; border: none; border-radius: 6px; cursor: pointer; font-weight: bold; }
-.btn-print { background: #e67e22; color: white; padding: 10px 25px; border: none; border-radius: 6px; cursor: pointer; font-weight: bold; }
+.welcome-card {
+    background: white; padding: 25px; border-radius: 12px; border-left: 6px solid #27ae60;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.05); margin-bottom: 25px;
+}
+.tab-container { display: flex; gap: 10px; margin-bottom: 25px; }
+
+/* --- TABELAS DE ESCALA (ESTILO FOTOS) --- */
+.tabela-escala { width: 100%; border-collapse: collapse; font-family: Arial, sans-serif; margin-top: 20px; box-shadow: 0 5px 15px rgba(0,0,0,0.1); }
+.tabela-escala thead .azul-header th { 
+    background-color: #4fb2e1; color: white; padding: 15px; font-size: 22px; border: 1px solid #ccc; text-transform: uppercase; text-align: center; 
+}
+.tabela-escala thead .amarelo-header th { 
+    background-color: #fce76c; color: black; padding: 12px; border: 1px solid #ccc; font-size: 14px; text-transform: uppercase; text-align: center; 
+}
+.tabela-escala td { border: 1px solid #ccc; padding: 12px; text-align: center; font-weight: bold; font-size: 14px; text-transform: uppercase; }
+.tabela-escala tbody tr:nth-child(even) { background-color: #a3d995; } /* Verde escuro */
+.tabela-escala tbody tr:nth-child(odd) { background-color: #c9e9bc; }  /* Verde claro */
+
+.footer-print { margin-top: 25px; text-align: center; border: 2px solid #333; padding: 15px; background: white; }
+.footer-print h4 { text-decoration: underline; margin-bottom: 10px; font-size: 17px; text-transform: uppercase; font-weight: 900; }
+.footer-print p { font-size: 14px; font-weight: 800; line-height: 1.5; color: #000; }
+
+/* --- FORMULÁRIOS --- */
+.grid-form-escala { display: grid; grid-template-columns: 1fr 1fr 1fr 1fr 1fr; gap: 8px; margin-top: 15px; }
+.grid-2-col { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-top: 10px; }
+textarea { width: 100%; padding: 10px; border-radius: 6px; border: 1px solid #ddd; resize: none; }
+
+/* --- BOTÕES E IMPRESSÃO --- */
+.btn-add { background: #27ae60; color: white; border: none; padding: 10px 20px; border-radius: 8px; cursor: pointer; font-weight: bold; }
+.btn-action { background: #27ae60; color: white; padding: 12px 25px; border: none; border-radius: 6px; cursor: pointer; font-weight: bold; }
+.btn-print { background: #e67e22; color: white; padding: 12px 25px; border: none; border-radius: 6px; cursor: pointer; font-weight: bold; }
 
 @media print {
     .no-print, #sidebar, .top-bar { display: none !important; }
     #main-content { padding: 0; }
-    #area-impressao-escala { display: block !important; }
+    #area-impressao-escala { display: block !important; width: 100%; }
 }
