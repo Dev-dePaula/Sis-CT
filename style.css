@@ -1,46 +1,75 @@
 * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', sans-serif; }
-body { background: #f4f7f6; overflow-x: hidden; }
+body { background: #f4f7f6; }
 
-/* Dashboard Core */
+/* --- TELA DE LOGIN PROFISSIONAL --- */
+#auth-screen {
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: linear-gradient(135deg, #1a252f 0%, #2c3e50 100%);
+}
+
+.auth-box {
+    background: white;
+    padding: 40px;
+    border-radius: 12px;
+    width: 380px;
+    box-shadow: 0 15px 35px rgba(0,0,0,0.4);
+    text-align: center;
+}
+
+.auth-box h2 { color: #2c3e50; margin-bottom: 25px; font-size: 24px; }
+.auth-box input, .auth-box select {
+    width: 100%;
+    padding: 12px;
+    margin-bottom: 15px;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    font-size: 15px;
+}
+
+.btn-primary {
+    width: 100%;
+    padding: 12px;
+    background: #27ae60;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 16px;
+    transition: 0.3s;
+}
+.btn-primary:hover { background: #219150; }
+
+/* --- DASHBOARD & SIDEBAR --- */
 #app { display: flex; height: 100vh; }
 #sidebar { width: 250px; background: #1a252f; color: white; display: flex; flex-direction: column; }
-.side-header { padding: 20px; text-align: center; background: #141d26; }
-#user-role-badge { background: #e74c3c; font-size: 10px; padding: 2px 8px; border-radius: 10px; text-transform: uppercase; }
-#menu-dinamico li { padding: 12px 20px; cursor: pointer; transition: 0.2s; border-left: 4px solid transparent; }
+.side-header { padding: 25px; text-align: center; background: #141d26; }
+#user-role-badge { background: #e74c3c; font-size: 10px; padding: 3px 8px; border-radius: 10px; }
+#menu-dinamico li { padding: 15px 20px; cursor: pointer; border-left: 4px solid transparent; }
 #menu-dinamico li:hover { background: #34495e; border-left: 4px solid #3498db; }
-.btn-logout { background: #c0392b; color: white; border: none; padding: 10px; cursor: pointer; }
-
-/* Main UI */
 #main-content { flex: 1; padding: 25px; overflow-y: auto; }
-.welcome-card { background: white; padding: 20px; border-radius: 8px; border-left: 5px solid #27ae60; margin-bottom: 20px; box-shadow: 0 2px 4px rgba(0,0,0,0.05); }
-.stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 15px; }
-.stat-card { background: white; padding: 20px; border-radius: 8px; text-align: center; cursor: pointer; box-shadow: 0 2px 4px rgba(0,0,0,0.05); }
-.stat-card p { font-size: 24px; font-weight: bold; }
 
-/* Tabelas e Cards de Dados */
-.tabela-dados { width: 100%; border-collapse: collapse; background: white; }
-.tabela-dados th { background: #34495e; color: white; padding: 12px; text-align: left; }
-.tabela-dados td { padding: 12px; border-bottom: 1px solid #eee; }
-.cards-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 15px; }
-.card-paciente { background: white; padding: 15px; border-radius: 8px; border-top: 4px solid #3498db; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
-.card-paciente textarea { width: 100%; margin: 8px 0; border: 1px solid #ddd; padding: 5px; }
+/* --- TABELAS DE ESCALA (MODELO IMAGENS) --- */
+.tabela-escala { width: 100%; border-collapse: collapse; font-family: Arial, sans-serif; }
+.tabela-escala thead .azul-header th { background-color: #4fb2e1; color: white; padding: 12px; font-size: 20px; border: 1px solid #ccc; text-transform: uppercase; }
+.tabela-escala thead .amarelo-header th { background-color: #fce76c; color: black; padding: 10px; border: 1px solid #ccc; font-size: 14px; text-transform: uppercase; }
 
-/* TABELA DE REFEIÇÕES (MODELO FIEL) */
-.tabela-refeicao { width: 100%; border-collapse: collapse; font-family: Arial, sans-serif; }
-.tabela-refeicao thead .titulo-principal th { background-color: #4fb2e1; color: white; padding: 12px; font-size: 20px; border: 1px solid #ccc; }
-.tabela-refeicao thead .cabecalho-colunas th { background-color: #fce76c; color: black; padding: 10px; border: 1px solid #ccc; font-size: 14px; }
-.tabela-refeicao td { border: 1px solid #ccc; padding: 10px; text-align: center; font-weight: bold; text-transform: uppercase; font-size: 13px; }
-.tabela-refeicao tbody tr:nth-child(even) { background-color: #a3d995; } /* Verde escuro */
-.tabela-refeicao tbody tr:nth-child(odd) { background-color: #c9e9bc; }  /* Verde claro */
+.tabela-escala td { border: 1px solid #ccc; padding: 10px; text-align: center; font-weight: bold; font-size: 13px; text-transform: uppercase; }
+.tabela-escala tbody tr:nth-child(even) { background-color: #a3d995; } /* Verde escuro */
+.tabela-escala tbody tr:nth-child(odd) { background-color: #c9e9bc; }  /* Verde claro */
 
-.footer-escala { margin-top: 20px; text-align: center; }
-.footer-escala p { font-weight: bold; text-decoration: underline; margin-bottom: 5px; font-size: 14px; }
-.link-escala { font-size: 10px; color: #666; text-align: left; }
+/* Rodapé das Escalas */
+.footer-print { margin-top: 20px; text-align: center; padding: 10px; }
+.footer-print h4 { text-decoration: underline; margin-bottom: 10px; font-size: 16px; text-transform: uppercase; }
+.footer-print p { font-size: 13px; margin-bottom: 10px; line-height: 1.4; font-weight: bold; }
 
-/* Modais */
-.modal { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.7); display: none; justify-content: center; align-items: center; z-index: 1000; }
-.modal-content { background: white; padding: 25px; border-radius: 10px; width: 450px; display: flex; flex-direction: column; gap: 10px; }
-.btn-add { background: #27ae60; color: white; border: none; padding: 10px 15px; border-radius: 5px; cursor: pointer; font-weight: bold; }
+/* Botões de Ação */
+.btn-tab { background: #34495e; color: white; padding: 8px 15px; border: none; border-radius: 4px; cursor: pointer; }
+.btn-action { background: #27ae60; color: white; padding: 10px 20px; border: none; border-radius: 5px; cursor: pointer; }
+.btn-print { background: #e67e22; color: white; padding: 10px 20px; border: none; border-radius: 5px; cursor: pointer; }
 
 /* Impressão */
 @media print {
@@ -48,3 +77,7 @@ body { background: #f4f7f6; overflow-x: hidden; }
     #main-content { padding: 0; }
     #area-impressao-escala { display: block !important; }
 }
+
+/* Modais */
+.modal { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.7); display: none; justify-content: center; align-items: center; z-index: 1000; }
+.modal-content { background: white; padding: 25px; border-radius: 10px; width: 400px; }
