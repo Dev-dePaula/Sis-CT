@@ -1,8 +1,8 @@
-/* CORREÇÃO DE SINTAXE: background-color, border-radius, width, padding */
+/* DESIGN REVISADO E CORRIGIDO */
 * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', Arial, sans-serif; }
 body { background-color: #f0f2f5; color: #333; }
 
-/* LOGIN PROFISSIONAL */
+/* LOGIN ESTILIZADO */
 #auth-screen { 
     height: 100vh; display: flex; justify-content: center; align-items: center; 
     background: linear-gradient(135deg, #141d26 0%, #2c3e50 100%); 
@@ -11,26 +11,26 @@ body { background-color: #f0f2f5; color: #333; }
     background-color: white; border-radius: 12px; padding: 40px; 
     box-shadow: 0 20px 40px rgba(0,0,0,0.5); width: 400px; text-align: center; 
 }
+.auth-header h2 { font-size: 24px; color: #2c3e50; font-weight: bold; margin-bottom: 5px; }
+.auth-header p { font-size: 13px; color: #7f8c8d; margin-bottom: 30px; }
 .auth-box input, .auth-box select { 
-    width: 100%; padding: 12px; margin-bottom: 15px; border: 1px solid #ddd; 
-    border-radius: 8px; background-color: #f9f9f9; 
+    width: 100%; padding: 12px; margin-bottom: 15px; border: 1px solid #ddd; border-radius: 8px; 
 }
 .btn-primary { 
-    width: 100%; padding: 14px; background-color: #27ae60; color: white; 
-    border: none; border-radius: 8px; cursor: pointer; font-weight: bold; 
+    width: 100%; padding: 14px; background-color: #27ae60; color: white; border: none; border-radius: 8px; cursor: pointer; font-weight: bold; 
 }
 
-/* SIDEBAR & NAV */
+/* SIDEBAR */
 #app { display: flex; height: 100vh; }
 #sidebar { width: 260px; background-color: #1a252f; color: white; display: flex; flex-direction: column; }
 .side-header { padding: 30px 20px; text-align: center; background-color: #141d26; }
-#user-role-badge { background-color: #e74c3c; font-size: 10px; padding: 4px 10px; border-radius: 20px; text-transform: uppercase; }
+#user-role-badge { background-color: #e74c3c; font-size: 10px; padding: 4px 10px; border-radius: 20px; text-transform: uppercase; font-weight: bold; }
 .user-welcome { padding: 15px; text-align: center; font-size: 14px; color: #bdc3c7; border-bottom: 1px solid #34495e; }
 #menu-dinamico li { padding: 15px 25px; cursor: pointer; transition: 0.3s; border-left: 4px solid transparent; }
 #menu-dinamico li:hover { background-color: #2c3e50; border-left-color: #3498db; }
 .btn-logout { background-color: #c0392b; color: white; border: none; padding: 15px; cursor: pointer; font-weight: bold; margin-top: auto; }
 
-/* TABELAS DE ESCALA (FIEL ÀS FOTOS) */
+/* ESCALAS (CORES DAS FOTOS) */
 .tabela-escala { width: 100%; border-collapse: collapse; margin-top: 20px; font-family: Arial; }
 .tabela-escala thead .azul-header th { background-color: #4fb2e1; color: white; padding: 15px; font-size: 20px; border: 1px solid #ccc; text-transform: uppercase; }
 .tabela-escala thead .amarelo-header th { background-color: #fce76c; color: black; padding: 12px; border: 1px solid #ccc; font-size: 14px; text-transform: uppercase; }
@@ -38,17 +38,12 @@ body { background-color: #f0f2f5; color: #333; }
 .tabela-escala tbody tr:nth-child(even) { background-color: #a3d995; } /* Verde escuro */
 .tabela-escala tbody tr:nth-child(odd) { background-color: #c9e9bc; }  /* Verde claro */
 
-.footer-print { margin-top: 25px; text-align: center; border: 2px solid #333; padding: 15px; background-color: white; font-weight: bold; font-size: 14px; }
-
-/* DOCUMENTO RDC 29 (FOLHA EVOLUÇÃO) */
-#folha-evolucao-oficial { width: 210mm; min-height: 297mm; padding: 15mm; background-color: white; margin: 0 auto; display: none; color: black; }
-.header-oficial { text-align: center; margin-bottom: 20px; }
-.logo-sol { font-size: 50px; font-weight: bold; color: #f1c40f; }
-.sub-logo { font-size: 14px; border-bottom: 1px solid #000; display: inline-block; padding-bottom: 5px; }
-.titulo-doc { font-size: 22px; text-decoration: underline; margin: 10px 0; }
+/* RDC 29 FOLHA */
+#folha-evolucao-oficial { width: 210mm; min-height: 297mm; padding: 15mm; background-color: white; margin: 0 auto; display: none; }
+.logo-sol { font-size: 50px; font-weight: bold; color: #f1c40f; text-align: center; }
+.titulo-doc { text-align: center; font-size: 20px; text-decoration: underline; margin: 10px 0; }
 .tabela-evolucao-folha { width: 100%; border-collapse: collapse; margin-top: 10px; }
 .tabela-evolucao-folha th, .tabela-evolucao-folha td { border: 1px solid #000; padding: 8px; height: 35px; }
-.footer-oficial { position: fixed; bottom: 15mm; width: 180mm; text-align: center; font-size: 11px; border-top: 1px solid #000; padding-top: 10px; }
 
 /* GERAL DASHBOARD */
 #main-content { flex: 1; padding: 30px; overflow-y: auto; }
@@ -57,9 +52,12 @@ body { background-color: #f0f2f5; color: #333; }
 .btn-action { background-color: #27ae60; color: white; padding: 12px 25px; border: none; border-radius: 6px; cursor: pointer; font-weight: bold; margin-top: 10px; }
 .btn-print { background-color: #e67e22; color: white; padding: 12px 25px; border: none; border-radius: 6px; cursor: pointer; font-weight: bold; margin-left: 10px; }
 
+.tabela-dados { width: 100%; border-collapse: collapse; background: white; border-radius: 10px; overflow: hidden; box-shadow: 0 4px 6px rgba(0,0,0,0.05); }
+.tabela-dados th { background: #34495e; color: white; padding: 15px; text-align: left; }
+.tabela-dados td { padding: 15px; border-bottom: 1px solid #eee; }
+
 @media print {
     .no-print, #sidebar, .top-bar, #auth-screen { display: none !important; }
-    #main-content { padding: 0; }
     #folha-evolucao-oficial, #area-impressao-escala { display: block !important; }
 }
 .modal { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.7); display: none; justify-content: center; align-items: center; z-index: 1000; }
