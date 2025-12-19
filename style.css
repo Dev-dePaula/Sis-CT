@@ -1,35 +1,122 @@
-/* TRADUÇÃO TÉCNICA: fundo -> background, raio-da-borda -> border-radius */
+/* SINTAXE TÉCNICA CORRIGIDA */
 * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', Arial, sans-serif; }
 body { background-color: #f0f2f5; }
 
-#auth-screen { height: 100vh; display: flex; justify-content: center; align-items: center; background: linear-gradient(135deg, #141d26 0%, #2c3e50 100%); }
-.auth-box { background-color: white; border-radius: 12px; padding: 40px; box-shadow: 0 10px 30px rgba(0,0,0,0.3); width: 380px; text-align: center; }
-.auth-box input { width: 100%; padding: 12px; margin-bottom: 15px; border: 1px solid #ddd; border-radius: 6px; }
+#auth-screen { 
+    height: 100vh; 
+    display: flex; 
+    justify-content: center; 
+    align-items: center; 
+    background: linear-gradient(135deg, #141d26 0%, #2c3e50 100%); 
+}
+
+.auth-box { 
+    background-color: white; 
+    border-radius: 12px; 
+    padding: 40px; 
+    box-shadow: 0 10px 30px rgba(0,0,0,0.3); 
+    width: 380px; 
+    text-align: center; 
+}
+
+.auth-box input { 
+    width: 100%; 
+    padding: 12px; 
+    margin-bottom: 15px; 
+    border: 1px solid #ddd; 
+    border-radius: 6px; 
+}
+
+.btn-primary {
+    width: 100%;
+    padding: 12px;
+    background-color: #27ae60;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: bold;
+}
 
 #app { display: flex; height: 100vh; }
-#sidebar { width: 260px; background-color: #1a252f; color: white; display: flex; flex-direction: column; }
-#menu-dinamico li { padding: 15px; cursor: pointer; border-left: 4px solid transparent; transition: 0.3s; }
-#menu-dinamico li:hover { background-color: #2c3e50; border-left-color: #3498db; }
+#sidebar { 
+    width: 260px; 
+    background-color: #1a252f; 
+    color: white; 
+    display: flex; 
+    flex-direction: column; 
+}
+
+#menu-dinamico li { 
+    padding: 15px; 
+    cursor: pointer; 
+    border-left: 4px solid transparent; 
+    transition: 0.3s; 
+}
+
+#menu-dinamico li:hover { 
+    background-color: #2c3e50; 
+    border-left-color: #3498db; 
+}
 
 /* ESTILO ESCALAS (CORES DAS IMAGENS) */
 .tabela-escala { width: 100%; border-collapse: collapse; margin-top: 20px; }
-.tabela-escala thead .azul-header th { background-color: #4fb2e1; color: white; padding: 15px; font-size: 20px; border: 1px solid #ccc; text-transform: uppercase; }
-.tabela-escala thead .amarelo-header th { background-color: #fce76c; color: black; padding: 10px; border: 1px solid #ccc; font-size: 13px; text-transform: uppercase; }
-.tabela-escala td { border: 1px solid #ccc; padding: 10px; text-align: center; font-weight: bold; text-transform: uppercase; font-size: 13px; }
+.tabela-escala thead .azul-header th { 
+    background-color: #4fb2e1; 
+    color: white; 
+    padding: 15px; 
+    font-size: 20px; 
+    border: 1px solid #ccc; 
+    text-transform: uppercase; 
+}
+
+.tabela-escala thead .amarelo-header th { 
+    background-color: #fce76c; 
+    color: black; 
+    padding: 10px; 
+    border: 1px solid #ccc; 
+    font-size: 13px; 
+    text-transform: uppercase; 
+}
+
+.tabela-escala td { 
+    border: 1px solid #ccc; 
+    padding: 10px; 
+    text-align: center; 
+    font-weight: bold; 
+    text-transform: uppercase; 
+    font-size: 13px; 
+}
+
 .tabela-escala tbody tr:nth-child(even) { background-color: #a3d995; }
 .tabela-escala tbody tr:nth-child(odd) { background-color: #c9e9bc; }
 
-/* FOLHA OFICIAL RDC 29 */
-#folha-evolucao-oficial { width: 210mm; min-height: 297mm; padding: 15mm; background-color: white; margin: 0 auto; display: none; }
+/* FOLHA DE EVOLUÇÃO (RDC 29) */
+#folha-evolucao-oficial { 
+    width: 210mm; 
+    min-height: 297mm; 
+    padding: 15mm; 
+    background-color: white; 
+    margin: 0 auto; 
+    display: none; 
+}
+
 .header-oficial { text-align: center; margin-bottom: 15px; }
 .logo-sol { font-size: 45px; font-weight: bold; color: #f1c40f; }
 .sub-logo { font-size: 14px; border-bottom: 1px solid #000; display: inline-block; }
 .titulo-doc { font-size: 20px; text-decoration: underline; margin: 10px 0; }
 .tabela-evolucao-folha { width: 100%; border-collapse: collapse; margin-top: 10px; }
-.tabela-evolucao-folha th, .tabela-evolucao-folha td { border: 1px solid #000; padding: 8px; height: 35px; }
+.tabela-evolucao-folha th, .tabela-evolucao-folha td { 
+    border: 1px solid #000; 
+    padding: 8px; 
+    height: 35px; 
+}
+
+.no-print { display: block; }
+.print-only { display: none; }
 
 @media print {
-    .no-print, #sidebar, .top-bar { display: none !important; }
-    #folha-evolucao-oficial { display: block !important; }
+    .no-print, #sidebar, .top-bar, #auth-screen { display: none !important; }
+    .print-only, #folha-evolucao-oficial { display: block !important; }
     body { background-color: white; }
 }
