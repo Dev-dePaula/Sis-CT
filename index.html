@@ -11,14 +11,10 @@
     <div id="auth-screen">
         <div id="tela-login" class="auth-box">
             <h2>Acesso CT Sol</h2>
-            <div class="input-group">
-                <input type="email" id="login-email" placeholder="E-mail" required>
-            </div>
-            <div class="input-group">
-                <input type="password" id="login-senha" placeholder="Senha" required>
-            </div>
+            <input type="email" id="login-email" placeholder="E-mail" required>
+            <input type="password" id="login-senha" placeholder="Senha" required>
             <button class="btn-primary" onclick="fazerLogin()">Entrar</button>
-            <p>Novo por aqui? <a href="#" onclick="alternarAuth('cadastro')">Solicitar Cadastro</a></p>
+            <p>Novo profissional? <a href="#" onclick="alternarAuth('cadastro')">Solicitar Cadastro</a></p>
         </div>
 
         <div id="tela-cadastro" class="auth-box" style="display: none;">
@@ -56,35 +52,46 @@
             <div id="dashboard-home" class="view-section">
                 <div class="welcome-card no-print">
                     <h2 id="welcome-text"></h2>
-                    <p>Paz do Senhor. Gestão Operacional e Clínica.</p>
+                    <p>Paz do Senhor. Bem-vindo à gestão operacional da CT Sol.</p>
                 </div>
                 <div class="stats-grid no-print" id="stats-area"></div>
             </div>
 
+            <div id="view-admin-equipe" class="view-section" style="display:none;">
+                <h2>Gestão de Equipe Profissional</h2>
+                <table class="tabela-dados">
+                    <thead><tr><th>Nome</th><th>Cargo</th><th>E-mail</th><th>Ações</th></tr></thead>
+                    <tbody id="lista-profissionais-tabela"></tbody>
+                </table>
+            </div>
+
             <div id="view-acolhidos" class="view-section" style="display:none;">
-                <div class="section-header"><h2>Gestão de Acolhidos</h2><button class="btn-add" onclick="abrirModal('modal-acolhido')">+ Novo</button></div>
+                <div class="section-header"><h2>Acolhidos na Casa</h2><button class="btn-add" onclick="abrirModal('modal-acolhido')">+ Novo</button></div>
                 <table class="tabela-dados">
                     <thead><tr><th>Nome</th><th>Idade</th><th>Substância</th><th>Ações</th></tr></thead>
                     <tbody id="lista-acolhidos-tabela"></tbody>
                 </table>
             </div>
 
+            <div id="view-diario" class="view-section" style="display:none;"><div class="cards-grid" id="cards-diario-acolhidos"></div></div>
+            <div id="view-plantao" class="view-section" style="display:none;">
+                <h2>Passagem de Plantão</h2>
+                <div class="welcome-card no-print"><textarea id="plantao-texto" rows="4" placeholder="Relato do turno..."></textarea><button class="btn-add" onclick="salvarPlantao()">Gravar</button></div>
+                <div id="historico-plantoes"></div>
+            </div>
+            <div id="view-medicamentos" class="view-section" style="display:none;"><div id="lista-medicao-acolhidos"></div></div>
+
             <div id="view-atividades" class="view-section" style="display:none;">
                 <div class="no-print">
-                    <h2>Atividades e Escalas</h2>
+                    <h2>Escalas e Atividades</h2>
                     <div style="margin-bottom: 20px; display: flex; gap: 10px; flex-wrap: wrap;">
-                        <button class="btn-tab" onclick="mostrarSubAtividade('lista')">Checklist Diário</button>
                         <button class="btn-tab" onclick="mostrarSubAtividade('refeicao')">Escala de Refeições</button>
                         <button class="btn-tab" onclick="mostrarSubAtividade('limpeza')">Escala de Limpeza</button>
                     </div>
                 </div>
 
-                <div id="sub-atv-lista">
-                    <ul id="lista-atividades" class="lista-check"></ul>
-                </div>
-
                 <div id="sub-atv-refeicao" style="display:none;">
-                    <div class="welcome-card no-print">
+                    <div class="welcome-card no-print" style="border-left-color: #3498db;">
                         <h3>Gerar Escala de Refeições</h3>
                         <div id="form-escala-refeicao"></div>
                         <div style="margin-top:15px; display:flex; gap:10px;">
@@ -95,8 +102,8 @@
                 </div>
 
                 <div id="sub-atv-limpeza" style="display:none;">
-                    <div class="welcome-card no-print">
-                        <h3>Gerar Limpeza Semanal & Faxinão</h3>
+                    <div class="welcome-card no-print" style="border-left-color: #e67e22;">
+                        <h3>Gerar Escala de Limpeza & Faxinão</h3>
                         <div id="form-escala-limpeza"></div>
                         <div style="margin-top:15px; display:flex; gap:10px;">
                             <button class="btn-action" onclick="gerarTabelaLimpeza()">Visualizar</button>
@@ -108,10 +115,9 @@
                 <div id="area-impressao-escala"></div>
             </div>
 
-            <div id="view-diario" class="view-section" style="display:none;"><div class="cards-grid" id="cards-diario-acolhidos"></div></div>
-            <div id="view-plantao" class="view-section" style="display:none;"><div class="welcome-card"><textarea id="plantao-texto" rows="4"></textarea><button class="btn-add" onclick="salvarPlantao()">Gravar</button></div><div id="historico-plantoes"></div></div>
-            <div id="view-medicamentos" class="view-section" style="display:none;"><div id="lista-medicao-acolhidos"></div></div>
             <div id="view-psi-prontuario" class="view-section" style="display:none;"><div class="cards-grid" id="lista-prontuarios"></div></div>
+            
+            <div id="view-social-documentos" class="view-section" style="display:none;"><div class="cards-grid" id="lista-docs-acolhidos"></div></div>
         </main>
     </div>
 
