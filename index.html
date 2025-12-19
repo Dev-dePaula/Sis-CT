@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sistema CT Sol - Gestão Integrada</title>
+    <title>Sistema CT Sol - Gestão Profissional</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -14,7 +14,7 @@
             <input type="email" id="login-email" placeholder="E-mail" required>
             <input type="password" id="login-senha" placeholder="Senha" required>
             <button class="btn-primary" onclick="fazerLogin()">Entrar</button>
-            <p>Novo profissional? <a href="#" onclick="alternarAuth('cadastro')">Solicitar Cadastro</a></p>
+            <p>Novo por aqui? <a href="#" onclick="alternarAuth('cadastro')">Solicitar Cadastro</a></p>
         </div>
 
         <div id="tela-cadastro" class="auth-box" style="display: none;">
@@ -52,17 +52,9 @@
             <div id="dashboard-home" class="view-section">
                 <div class="welcome-card no-print">
                     <h2 id="welcome-text"></h2>
-                    <p>Paz do Senhor. Bem-vindo à gestão operacional da CT Sol.</p>
+                    <p>Paz do Senhor. Gestão Integrada CT Sol.</p>
                 </div>
-                <div class="stats-grid no-print" id="stats-area"></div>
-            </div>
-
-            <div id="view-admin-equipe" class="view-section" style="display:none;">
-                <h2>Gestão de Equipe Profissional</h2>
-                <table class="tabela-dados">
-                    <thead><tr><th>Nome</th><th>Cargo</th><th>E-mail</th><th>Ações</th></tr></thead>
-                    <tbody id="lista-profissionais-tabela"></tbody>
-                </table>
+                <div id="stats-area" class="stats-grid no-print"></div>
             </div>
 
             <div id="view-acolhidos" class="view-section" style="display:none;">
@@ -73,61 +65,53 @@
                 </table>
             </div>
 
-            <div id="view-diario" class="view-section" style="display:none;"><div class="cards-grid" id="cards-diario-acolhidos"></div></div>
-            <div id="view-plantao" class="view-section" style="display:none;">
-                <h2>Passagem de Plantão</h2>
-                <div class="welcome-card no-print"><textarea id="plantao-texto" rows="4" placeholder="Relato do turno..."></textarea><button class="btn-add" onclick="salvarPlantao()">Gravar</button></div>
-                <div id="historico-plantoes"></div>
-            </div>
-            <div id="view-medicamentos" class="view-section" style="display:none;"><div id="lista-medicao-acolhidos"></div></div>
-
             <div id="view-atividades" class="view-section" style="display:none;">
                 <div class="no-print">
-                    <h2>Escalas e Cronogramas</h2>
-                    <div style="margin-bottom: 20px; display: flex; gap: 10px; flex-wrap: wrap;">
-                        <button class="btn-tab" onclick="mostrarSubAtividade('refeicao')">Escala de Refeições</button>
-                        <button class="btn-tab" onclick="mostrarSubAtividade('limpeza')">Escala de Limpeza</button>
+                    <h2>Escalas de Trabalho</h2>
+                    <div style="margin-bottom: 20px; display: flex; gap: 10px;">
+                        <button class="btn-tab" onclick="mostrarSubAtividade('refeicao')">Refeições</button>
+                        <button class="btn-tab" onclick="mostrarSubAtividade('limpeza')">Limpeza</button>
                     </div>
                 </div>
+
                 <div id="sub-atv-refeicao" style="display:none;">
                     <div class="welcome-card no-print" style="border-left-color: #3498db;">
-                        <h3>Gerar Tabela de Refeições</h3>
+                        <h3>Preencher Refeições</h3>
                         <div id="form-escala-refeicao"></div>
-                        <div style="margin-top:15px; display:flex; gap:10px;">
-                            <button class="btn-action" onclick="gerarTabelaRefeicao()">Visualizar</button>
-                            <button class="btn-print" onclick="imprimirEscala()">Imprimir PDF</button>
-                        </div>
+                        <button class="btn-action" onclick="gerarTabelaRefeicao()">Gerar Tabela</button>
+                        <button class="btn-print" onclick="imprimirEscala()">Imprimir</button>
                     </div>
                 </div>
+
                 <div id="sub-atv-limpeza" style="display:none;">
                     <div class="welcome-card no-print" style="border-left-color: #e67e22;">
-                        <h3>Gerar Limpeza Semanal & Faxinão</h3>
+                        <h3>Preencher Limpeza</h3>
                         <div id="form-escala-limpeza"></div>
-                        <div style="margin-top:15px; display:flex; gap:10px;">
-                            <button class="btn-action" onclick="gerarTabelaLimpeza()">Visualizar</button>
-                            <button class="btn-print" onclick="imprimirEscala()">Imprimir PDF</button>
-                        </div>
+                        <button class="btn-action" onclick="gerarTabelaLimpeza()">Gerar Tabela</button>
+                        <button class="btn-print" onclick="imprimirEscala()">Imprimir</button>
                     </div>
                 </div>
                 <div id="area-impressao-escala"></div>
             </div>
 
-            <div id="view-psi-prontuario" class="view-section" style="display:none;"><div class="cards-grid" id="lista-prontuarios"></div></div>
-
             <div id="view-social-vinculos" class="view-section" style="display:none;">
-                <h2>Vínculos Familiares (Social)</h2>
+                <h2>Vínculos Familiares</h2>
                 <div class="welcome-card no-print" style="border-left-color: #9b59b6;">
-                    <select id="social-acolhido-select"></select>
-                    <textarea id="social-contato-texto" rows="3" placeholder="Relato do contato com a família (ligação/visita)..."></textarea>
-                    <button class="btn-action" style="background:#9b59b6" onclick="salvarContatoSocial()">Registrar Contato</button>
+                    <select id="soc-acolhido-select"></select>
+                    <textarea id="soc-contato-texto" rows="3" placeholder="Relato do contato social..."></textarea>
+                    <button class="btn-action" style="background:#9b59b6" onclick="salvarContatoSocial()">Gravar Relato</button>
                 </div>
-                <div id="historico-social-contatos"></div>
+                <div id="historico-social"></div>
             </div>
 
             <div id="view-social-docs" class="view-section" style="display:none;">
-                <h2>Checklist de Documentação</h2>
+                <h2>Checklist de Documentos</h2>
                 <div class="cards-grid" id="lista-docs-social"></div>
             </div>
+
+            <div id="view-diario" class="view-section" style="display:none;"><div class="cards-grid" id="cards-diario-acolhidos"></div></div>
+            <div id="view-plantao" class="view-section" style="display:none;"><div id="historico-plantoes"></div></div>
+            <div id="view-psi-prontuario" class="view-section" style="display:none;"><div class="cards-grid" id="lista-prontuarios"></div></div>
         </main>
     </div>
 
