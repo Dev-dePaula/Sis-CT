@@ -14,25 +14,9 @@
                 <h2>SISTEMA CT SOL</h2>
                 <p>Gestão Operacional e Clínica</p>
             </div>
-            <input type="email" id="login-email" placeholder="E-mail de acesso" required>
-            <input type="password" id="login-senha" placeholder="Senha" required>
+            <input type="email" id="login-email" placeholder="E-mail de acesso">
+            <input type="password" id="login-senha" placeholder="Senha">
             <button class="btn-primary" onclick="fazerLogin()">ENTRAR</button>
-            <p class="auth-footer">Novo profissional? <a href="#" onclick="alternarAuth('cadastro')">Cadastre-se</a></p>
-        </div>
-
-        <div id="tela-cadastro" class="auth-box" style="display: none;">
-            <h2>CADASTRO PROFISSIONAL</h2>
-            <input type="text" id="cad-nome" placeholder="Nome Completo">
-            <select id="cad-cargo">
-                <option value="educador">Educador / Monitor</option>
-                <option value="psicologa">Psicóloga(o)</option>
-                <option value="social">Assistente Social</option>
-                <option value="admin">Administrador (Diretoria)</option>
-            </select>
-            <input type="email" id="cad-email" placeholder="E-mail">
-            <input type="password" id="cad-senha" placeholder="Criar Senha">
-            <button class="btn-primary" onclick="cadastrarProfissional()">SOLICITAR</button>
-            <p class="auth-footer"><a href="#" onclick="alternarAuth('login')">Voltar ao Login</a></p>
         </div>
     </div>
 
@@ -52,82 +36,61 @@
                 <h1 id="page-title">Dashboard</h1>
             </header>
 
-            <div id="dashboard-home" class="view-section">
-                <div class="welcome-card no-print">
-                    <h2 id="welcome-text"></h2>
-                    <p>Paz do Senhor. Gestão Unificada CT Sol.</p>
-                </div>
-                <div id="stats-area" class="stats-grid no-print"></div>
-            </div>
-
             <div id="view-acolhidos" class="view-section" style="display:none;">
                 <div class="section-header"><h2>Acolhidos</h2><button class="btn-add" onclick="abrirModal('modal-acolhido')">+ NOVO</button></div>
                 <table class="tabela-dados">
-                    <thead><tr><th>Nome</th><th>Idade</th><th>Substância</th><th>Status</th></tr></thead>
+                    <thead><tr><th>Nome</th><th>Ações</th></tr></thead>
                     <tbody id="lista-acolhidos-tabela"></tbody>
                 </table>
             </div>
 
             <div id="view-atividades" class="view-section" style="display:none;">
                 <div class="no-print">
-                    <div class="tab-container">
-                        <button class="btn-tab" onclick="mostrarSubAtividade('refeicao')">REFEIÇÕES</button>
-                        <button class="btn-tab" onclick="mostrarSubAtividade('limpeza')">LIMPEZA</button>
-                    </div>
+                    <button class="btn-tab" onclick="mostrarSubAtividade('refeicao')">Escala Refeição</button>
+                    <button class="btn-tab" onclick="mostrarSubAtividade('limpeza')">Escala Limpeza</button>
                 </div>
-                <div id="sub-atv-refeicao" style="display:none;">
-                    <div class="welcome-card no-print"><div id="form-escala-refeicao"></div><button class="btn-action" onclick="gerarTabelaRefeicao()">VISUALIZAR</button><button class="btn-print" onclick="imprimirEscala()">IMPRIMIR</button></div>
-                </div>
-                <div id="sub-atv-limpeza" style="display:none;">
-                    <div class="welcome-card no-print"><div id="form-escala-limpeza"></div><button class="btn-action" onclick="gerarTabelaLimpeza()">VISUALIZAR</button><button class="btn-print" onclick="imprimirEscala()">IMPRIMIR</button></div>
-                </div>
+                <div id="sub-atv-refeicao" style="display:none;"><div id="form-escala-refeicao"></div><button class="btn-print" onclick="imprimirEscala()">Imprimir</button></div>
+                <div id="sub-atv-limpeza" style="display:none;"><div id="form-escala-limpeza"></div><button class="btn-print" onclick="imprimirEscala()">Imprimir</button></div>
                 <div id="area-impressao-escala"></div>
             </div>
 
             <div id="view-psi-clinico" class="view-section" style="display:none;">
-                <h2>Evolução Clínica Psicológica</h2>
+                <h2 class="no-print">Evolução Psicológica</h2>
                 <div class="welcome-card no-print" style="border-left-color: #9b59b6;">
                     <label>Acolhido:</label>
                     <select id="psi-acolhido-select"></select>
-                    <div class="grid-2-col">
-                        <div>
-                            <label>Estado Emocional:</label>
-                            <select id="psi-humor">
-                                <option>Estável</option><option>Ansioso</option><option>Depressivo</option><option>Resistente</option><option>Motivado</option>
-                            </select>
-                        </div>
-                        <div>
-                            <label>Nível de Fissura (Craving):</label>
-                            <select id="psi-fissura">
-                                <option>Baixo</option><option>Moderado</option><option>Alto</option>
-                            </select>
-                        </div>
-                    </div>
-                    <label>Relato da Sessão (Sigiloso):</label>
-                    <textarea id="psi-relato" rows="4" placeholder="Registro técnico do atendimento individual..."></textarea>
-                    <button class="btn-action" style="background:#9b59b6" onclick="salvarEvolucaoPsi()">GRAVAR EVOLUÇÃO</button>
+                    <label>Relato da Evolução:</label>
+                    <textarea id="psi-relato" rows="6" placeholder="Descreva a evolução..."></textarea>
+                    <button class="btn-action" style="background:#9b59b6" onclick="gerarEvolucaoOficial()">GERAR DOCUMENTO OFICIAL</button>
                 </div>
-                <div id="historico-psi"></div>
             </div>
-
-            <div id="view-social-anamnese" class="view-section" style="display:none;">
-                <h2>Anamnese Social</h2>
-                <div class="welcome-card no-print" style="border-left-color: #e67e22;">
-                    <select id="ana-acolhido-select"></select>
-                    <textarea id="ana-familia" placeholder="Dinâmica Familiar..."></textarea>
-                    <textarea id="ana-parecer" rows="3" placeholder="Parecer Técnico Social..."></textarea>
-                    <button class="btn-action" style="background:#e67e22" onclick="salvarAnamnese()">SALVAR</button>
-                </div>
-                <div id="historico-anamnese"></div>
-            </div>
-
-            <div id="view-diario" class="view-section" style="display:none;"><div class="cards-grid" id="cards-diario-acolhidos"></div></div>
-            <div id="view-plantao" class="view-section" style="display:none;"><div id="historico-plantoes"></div></div>
-            <div id="view-social-docs" class="view-section" style="display:none;"><div class="cards-grid" id="lista-docs-social"></div></div>
         </main>
     </div>
 
-    <div id="modal-acolhido" class="modal"><div class="modal-content"><h3>Novo Acolhido</h3><input id="ac-nome" placeholder="Nome"><input id="ac-idade" type="number"><input id="ac-droga" placeholder="Droga"><button onclick="salvarAcolhido()">SALVAR</button><button onclick="fecharModal('modal-acolhido')">FECHAR</button></div></div>
+    <div id="folha-evolucao-oficial" class="print-only">
+        <div class="header-oficial">
+            <div class="logo-sol">SOL</div>
+            <p class="sub-logo">Comunidade Solidariedade</p>
+            <h1 class="titulo-doc">EVOLUÇÃO MULTIPROFISSIONAL</h1>
+            <p class="rdc-ref">ART. 7º DA RDC Nº 29 DE 30 DE JUNHO DE 2011</p>
+            <p class="rdc-desc">(EVOLUÇÃO TERAPÊUTICA, PARTICIPAÇÃO EM GRUPOS, ATENDIMENTOS INDIVIDUAIS E DEMAIS SITUAÇÕES DO COTIDIANO)</p>
+        </div>
+        <div class="campos-identificacao">
+            <span><strong>ACOLHIDO:</strong> <span id="print-nome-acolhido"></span></span>
+            <span style="float: right;"><strong>FOLHA:</strong> ________</span>
+        </div>
+        <table class="tabela-evolucao-folha">
+            <thead><tr><th style="width: 20%;">DATA</th><th>DESCRIÇÃO</th></tr></thead>
+            <tbody id="tabela-linhas-evolucao"></tbody>
+        </table>
+        <footer class="footer-oficial">
+            <p><strong>Comunidade Solidariedade SOL - COMUNIDADE TERAPÊUTICA</strong></p>
+            <p>Rua Manoel Gabriel de Oliveira, 544 – Estância Jockey Clube – São José do Rio Preto-SP CEP: 15081-250</p>
+            <p>ct.sol@hotmail.com</p>
+        </footer>
+    </div>
+
+    <div id="modal-acolhido" class="modal"><div class="modal-content"><h3>Novo Acolhido</h3><input id="ac-nome" placeholder="Nome Completo"><button onclick="salvarAcolhido()">SALVAR</button><button onclick="fecharModal('modal-acolhido')">FECHAR</button></div></div>
 
     <script src="script.js"></script>
 </body>
