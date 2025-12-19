@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sistema CT Sol - Gestão Integrada</title>
+    <title>Sistema CT Sol - Gestão Profissional</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -67,7 +67,7 @@
                 </div>
                 <table class="tabela-dados">
                     <thead>
-                        <tr><th>Nome do Acolhido</th><th>Idade</th><th>Droga Escolha</th><th>Status</th></tr>
+                        <tr><th>Nome do Acolhido</th><th>Idade</th><th>Substância</th><th>Status</th></tr>
                     </thead>
                     <tbody id="lista-acolhidos-tabela"></tbody>
                 </table>
@@ -83,8 +83,7 @@
                 </div>
 
                 <div id="sub-atv-refeicao" style="display:none;">
-                    <div class="welcome-card no-print" style="border-left-color: #3498db;">
-                        <h3>Configurar Refeições Diárias</h3>
+                    <div class="welcome-card no-print">
                         <div id="form-escala-refeicao" class="grid-form-escala"></div>
                         <div class="actions-escala">
                             <button class="btn-action" onclick="gerarTabelaRefeicao()">VISUALIZAR TABELA</button>
@@ -94,8 +93,7 @@
                 </div>
 
                 <div id="sub-atv-limpeza" style="display:none;">
-                    <div class="welcome-card no-print" style="border-left-color: #e67e22;">
-                        <h3>Configurar Limpeza & Faxinão</h3>
+                    <div class="welcome-card no-print">
                         <div id="form-escala-limpeza" class="grid-form-escala"></div>
                         <div class="actions-escala">
                             <button class="btn-action" onclick="gerarTabelaLimpeza()">VISUALIZAR TABELA</button>
@@ -103,13 +101,12 @@
                         </div>
                     </div>
                 </div>
-
                 <div id="area-impressao-escala"></div>
             </div>
 
             <div id="view-social-anamnese" class="view-section" style="display:none;">
                 <h2>Anamnese Social (Entrevista Inicial)</h2>
-                <div class="welcome-card no-print" style="border-left-color: #9b59b6;">
+                <div class="welcome-card no-print">
                     <label>Acolhido:</label>
                     <select id="ana-acolhido-select"></select>
                     <div class="grid-2-col">
