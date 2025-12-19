@@ -1,85 +1,50 @@
 * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', sans-serif; }
-body { background: #f4f7f6; }
+body { background: #f4f7f6; overflow-x: hidden; }
 
-/* Layout Geral */
+/* Dashboard Core */
 #app { display: flex; height: 100vh; }
 #sidebar { width: 250px; background: #1a252f; color: white; display: flex; flex-direction: column; }
 .side-header { padding: 20px; text-align: center; background: #141d26; }
-#menu-dinamico li { padding: 12px 20px; cursor: pointer; border-left: 4px solid transparent; }
+#user-role-badge { background: #e74c3c; font-size: 10px; padding: 2px 8px; border-radius: 10px; text-transform: uppercase; }
+#menu-dinamico li { padding: 12px 20px; cursor: pointer; transition: 0.2s; border-left: 4px solid transparent; }
 #menu-dinamico li:hover { background: #34495e; border-left: 4px solid #3498db; }
+.btn-logout { background: #c0392b; color: white; border: none; padding: 10px; cursor: pointer; }
+
+/* Main UI */
 #main-content { flex: 1; padding: 25px; overflow-y: auto; }
+.welcome-card { background: white; padding: 20px; border-radius: 8px; border-left: 5px solid #27ae60; margin-bottom: 20px; box-shadow: 0 2px 4px rgba(0,0,0,0.05); }
+.stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 15px; }
+.stat-card { background: white; padding: 20px; border-radius: 8px; text-align: center; cursor: pointer; box-shadow: 0 2px 4px rgba(0,0,0,0.05); }
+.stat-card p { font-size: 24px; font-weight: bold; }
 
-/* Estilos de Login */
-#auth-screen { height: 100vh; display: flex; justify-content: center; align-items: center; background: #2c3e50; }
-.auth-box { background: white; padding: 30px; border-radius: 10px; width: 340px; text-align: center; }
-.auth-box input, .auth-box select { width: 100%; padding: 10px; margin-bottom: 10px; border: 1px solid #ddd; }
-.auth-box button { width: 100%; padding: 10px; background: #27ae60; color: white; border: none; cursor: pointer; }
+/* Tabelas e Cards de Dados */
+.tabela-dados { width: 100%; border-collapse: collapse; background: white; }
+.tabela-dados th { background: #34495e; color: white; padding: 12px; text-align: left; }
+.tabela-dados td { padding: 12px; border-bottom: 1px solid #eee; }
+.cards-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 15px; }
+.card-paciente { background: white; padding: 15px; border-radius: 8px; border-top: 4px solid #3498db; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
+.card-paciente textarea { width: 100%; margin: 8px 0; border: 1px solid #ddd; padding: 5px; }
 
-/* TABELA DE REFEIÇÃO (FIEL À FOTO)  */
-.tabela-refeicao {
-    width: 100%;
-    border-collapse: collapse;
-    margin-top: 20px;
-    font-family: Arial, Helvetica, sans-serif;
-}
-
-.tabela-refeicao thead .titulo-principal th {
-    background-color: #4fb2e1; /* Azul da foto  */
-    color: white;
-    padding: 12px;
-    font-size: 20px;
-    text-align: center;
-    border: 1px solid #ccc;
-}
-
-.tabela-refeicao thead .cabecalho-colunas th {
-    background-color: #fce76c; /* Amarelo da foto  */
-    color: black;
-    padding: 10px;
-    border: 1px solid #ccc;
-    font-size: 14px;
-}
-
-.tabela-refeicao td {
-    border: 1px solid #ccc;
-    padding: 12px;
-    text-align: center;
-    font-weight: bold;
-    font-size: 14px;
-    text-transform: uppercase;
-}
-
-/* Cores alternadas das linhas (Verde da foto)  */
+/* TABELA DE REFEIÇÕES (MODELO FIEL) */
+.tabela-refeicao { width: 100%; border-collapse: collapse; font-family: Arial, sans-serif; }
+.tabela-refeicao thead .titulo-principal th { background-color: #4fb2e1; color: white; padding: 12px; font-size: 20px; border: 1px solid #ccc; }
+.tabela-refeicao thead .cabecalho-colunas th { background-color: #fce76c; color: black; padding: 10px; border: 1px solid #ccc; font-size: 14px; }
+.tabela-refeicao td { border: 1px solid #ccc; padding: 10px; text-align: center; font-weight: bold; text-transform: uppercase; font-size: 13px; }
 .tabela-refeicao tbody tr:nth-child(even) { background-color: #a3d995; } /* Verde escuro */
 .tabela-refeicao tbody tr:nth-child(odd) { background-color: #c9e9bc; }  /* Verde claro */
 
-.footer-escala {
-    margin-top: 20px;
-    text-align: center;
-}
+.footer-escala { margin-top: 20px; text-align: center; }
+.footer-escala p { font-weight: bold; text-decoration: underline; margin-bottom: 5px; font-size: 14px; }
+.link-escala { font-size: 10px; color: #666; text-align: left; }
 
-.footer-escala p {
-    font-weight: bold;
-    font-size: 16px;
-    text-decoration: underline;
-    margin-bottom: 10px;
-}
+/* Modais */
+.modal { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.7); display: none; justify-content: center; align-items: center; z-index: 1000; }
+.modal-content { background: white; padding: 25px; border-radius: 10px; width: 450px; display: flex; flex-direction: column; gap: 10px; }
+.btn-add { background: #27ae60; color: white; border: none; padding: 10px 15px; border-radius: 5px; cursor: pointer; font-weight: bold; }
 
-.link-escala {
-    font-size: 10px;
-    color: #666;
-    text-align: left;
-}
-
-/* Regras de Impressão */
+/* Impressão */
 @media print {
-    #sidebar, .top-bar, .no-print, .btn-add { display: none !important; }
+    .no-print, #sidebar, .top-bar { display: none !important; }
     #main-content { padding: 0; }
-    #area-impressao-escala { display: block !important; width: 100%; }
+    #area-impressao-escala { display: block !important; }
 }
-
-/* Modals */
-.modal { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.7); display: none; justify-content: center; align-items: center; }
-.modal-content { background: white; padding: 25px; border-radius: 10px; width: 400px; }
-.btn-add { background: #27ae60; color: white; border: none; padding: 10px 20px; border-radius: 5px; cursor: pointer; font-weight: bold; }
-
