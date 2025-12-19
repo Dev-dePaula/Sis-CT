@@ -1,32 +1,26 @@
 * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', sans-serif; }
 body { background: #f4f7f6; }
 
-/* TELA DE LOGIN REVISADA */
+/* TELA DE LOGIN (ESTILO SOFTWARE PROFISSIONAL) */
 #auth-screen {
     height: 100vh; display: flex; justify-content: center; align-items: center;
     background: linear-gradient(135deg, #1a252f 0%, #2c3e50 100%);
 }
 .auth-box {
     background: white; padding: 40px; border-radius: 12px; width: 380px;
-    box-shadow: 0 15px 35px rgba(0,0,0,0.5); text-align: center;
+    box-shadow: 0 15px 35px rgba(0,0,0,0.4); text-align: center;
 }
 .auth-box h2 { color: #2c3e50; margin-bottom: 25px; font-weight: bold; }
 .auth-box input, .auth-box select { width: 100%; padding: 12px; margin-bottom: 15px; border: 1px solid #ddd; border-radius: 6px; }
-.btn-primary { width: 100%; padding: 12px; background: #27ae60; color: white; border: none; border-radius: 6px; cursor: pointer; font-weight: bold; }
+.btn-primary { width: 100%; padding: 12px; background: #27ae60; color: white; border: none; border-radius: 6px; cursor: pointer; font-weight: bold; transition: 0.3s; }
+.btn-primary:hover { background: #219150; }
 
-/* DASHBOARD & SIDEBAR */
-#app { display: flex; height: 100vh; }
+/* SIDEBAR */
 #sidebar { width: 260px; background: #1a252f; color: white; display: flex; flex-direction: column; }
 .side-header { padding: 30px 20px; text-align: center; background: #141d26; }
 #user-role-badge { background: #e74c3c; font-size: 10px; padding: 3px 10px; border-radius: 20px; }
-#user-name-display { padding: 15px; text-align: center; border-bottom: 1px solid #34495e; color: #bdc3c7; font-size: 14px; }
 #menu-dinamico li { padding: 15px 25px; cursor: pointer; transition: 0.3s; border-left: 4px solid transparent; }
 #menu-dinamico li:hover { background: #2c3e50; border-left: 4px solid #3498db; }
-.btn-logout { background: #c0392b; color: white; border: none; padding: 15px; cursor: pointer; font-weight: bold; }
-
-/* ÁREA PRINCIPAL */
-#main-content { flex: 1; padding: 30px; overflow-y: auto; }
-.welcome-card { background: white; padding: 25px; border-radius: 10px; border-left: 6px solid #27ae60; box-shadow: 0 4px 6px rgba(0,0,0,0.05); margin-bottom: 25px; }
 
 /* TABELAS DE ESCALA (CORES DAS FOTOS) */
 .tabela-escala { width: 100%; border-collapse: collapse; font-family: Arial, sans-serif; margin-top: 20px; }
@@ -36,21 +30,20 @@ body { background: #f4f7f6; }
 .tabela-escala tbody tr:nth-child(even) { background-color: #a3d995; }
 .tabela-escala tbody tr:nth-child(odd) { background-color: #c9e9bc; }
 
-.footer-print { margin-top: 20px; text-align: center; font-weight: bold; font-size: 14px; }
-
-/* REGRAS DE IMPRESSÃO */
-@media print {
-    .no-print, #sidebar, .top-bar { display: none !important; }
-    #main-content { padding: 0; }
-    #area-impressao-escala { display: block !important; }
-}
-
-/* OUTROS ELEMENTOS */
+/* GERAL */
+#main-content { flex: 1; padding: 30px; overflow-y: auto; }
+.welcome-card { background: white; padding: 25px; border-radius: 10px; border-left: 6px solid #27ae60; box-shadow: 0 4px 6px rgba(0,0,0,0.05); margin-bottom: 25px; }
 .cards-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 20px; }
 .card-paciente { background: white; padding: 20px; border-radius: 10px; border-top: 5px solid #3498db; box-shadow: 0 4px 6px rgba(0,0,0,0.05); }
 .tabela-dados { width: 100%; border-collapse: collapse; background: white; border-radius: 10px; overflow: hidden; }
 .tabela-dados th { background: #34495e; color: white; padding: 15px; text-align: left; }
 .tabela-dados td { padding: 15px; border-bottom: 1px solid #eee; }
 .btn-tab { background: #34495e; color: white; padding: 8px 15px; border: none; border-radius: 4px; cursor: pointer; }
-.modal { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.7); display: none; justify-content: center; align-items: center; z-index: 1000; }
-.modal-content { background: white; padding: 30px; border-radius: 12px; width: 450px; display: flex; flex-direction: column; gap: 15px; }
+.btn-action { background: #27ae60; color: white; padding: 10px 25px; border: none; border-radius: 6px; cursor: pointer; font-weight: bold; }
+.btn-print { background: #e67e22; color: white; padding: 10px 25px; border: none; border-radius: 6px; cursor: pointer; font-weight: bold; }
+
+@media print {
+    .no-print, #sidebar, .top-bar { display: none !important; }
+    #main-content { padding: 0; }
+    #area-impressao-escala { display: block !important; }
+}
