@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sistema CT Sol - Gestão Integrada</title>
+    <title>Sistema CT Sol - Gestão Profissional</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -14,10 +14,10 @@
                 <h2>SISTEMA CT SOL</h2>
                 <p>Gestão Operacional e Clínica</p>
             </div>
-            <input type="email" id="login-email" placeholder="E-mail de acesso">
-            <input type="password" id="login-senha" placeholder="Senha">
+            <input type="email" id="login-email" placeholder="E-mail de acesso" required>
+            <input type="password" id="login-senha" placeholder="Senha" required>
             <button class="btn-primary" onclick="fazerLogin()">ENTRAR</button>
-            <p class="auth-footer">Novo profissional? <a href="#" onclick="alternarAuth('cadastro')">Cadastre-se</a></p>
+            <p class="auth-footer">Novo profissional? <a href="#" onclick="alternarAuth('cadastro')">Solicitar Cadastro</a></p>
         </div>
 
         <div id="tela-cadastro" class="auth-box" style="display: none;">
@@ -52,6 +52,14 @@
                 <h1 id="page-title">Dashboard</h1>
             </header>
 
+            <div id="dashboard-home" class="view-section">
+                <div class="welcome-card no-print">
+                    <h2 id="welcome-text"></h2>
+                    <p>Paz do Senhor. Bem-vindo à CT Sol.</p>
+                </div>
+                <div id="stats-area" class="stats-grid no-print"></div>
+            </div>
+
             <div id="view-acolhidos" class="view-section" style="display:none;">
                 <div class="section-header"><h2>Acolhidos na Casa</h2><button class="btn-add" onclick="abrirModal('modal-acolhido')">+ NOVO</button></div>
                 <table class="tabela-dados">
@@ -62,14 +70,14 @@
 
             <div id="view-atividades" class="view-section" style="display:none;">
                 <div class="no-print">
-                    <div class="tab-container">
-                        <button class="btn-tab" onclick="mostrarSubAtividade('refeicao')">REFEIÇÕES</button>
-                        <button class="btn-tab" onclick="mostrarSubAtividade('limpeza')">LIMPEZA</button>
+                    <div style="margin-bottom: 20px; display: flex; gap: 10px;">
+                        <button class="btn-tab" onclick="mostrarSubAtividade('refeicao')">Refeições</button>
+                        <button class="btn-tab" onclick="mostrarSubAtividade('limpeza')">Limpeza</button>
                     </div>
                 </div>
                 <div id="sub-atv-refeicao" style="display:none;">
                     <div class="welcome-card no-print" style="border-left-color: #3498db;">
-                        <div id="form-escala-refeicao" class="grid-form-escala"></div>
+                        <div id="form-escala-refeicao"></div>
                         <button class="btn-action" onclick="gerarTabelaRefeicao()">VISUALIZAR</button>
                         <button class="btn-print" onclick="imprimirEscala()">IMPRIMIR</button>
                     </div>
@@ -85,21 +93,37 @@
             </div>
 
             <div id="view-psi-clinico" class="view-section" style="display:none;">
-                <h2 class="no-print">Evolução Clínica</h2>
+                <h2 class="no-print">Evolução Multiprofissional (RDC 29)</h2>
                 <div class="welcome-card no-print" style="border-left-color: #9b59b6;">
-                    <label>Acolhido:</label>
+                    <label>Selecionar Acolhido:</label>
                     <select id="psi-acolhido-select"></select>
-                    <label>Relato da Evolução:</label>
-                    <textarea id="psi-relato" rows="6" placeholder="Descreva a evolução..."></textarea>
+                    <label>Evolução Terapêutica / Relato:</label>
+                    <textarea id="psi-relato" rows="6" placeholder="Registro técnico..."></textarea>
                     <button class="btn-action" style="background-color:#9b59b6; color:white;" onclick="gerarEvolucaoOficial()">GERAR DOCUMENTO OFICIAL</button>
                 </div>
             </div>
 
-            <div id="view-diario" class="view-section" style="display:none;"><div class="cards-grid" id="cards-diario-acolhidos"></div></div>
             <div id="view-social-anamnese" class="view-section" style="display:none;">
-                <div class="welcome-card"><select id="ana-acolhido-select"></select><textarea id="ana-parecer" rows="4"></textarea><button class="btn-add" onclick="salvarAnamnese()">Salvar</button></div>
+                <h2>Anamnese Social</h2>
+                <div class="welcome-card no-print" style="border-left-color: #e67e22;">
+                    <select id="ana-acolhido-select"></select>
+                    <textarea id="ana-parecer" rows="4" placeholder="Parecer Técnico Social..."></textarea>
+                    <button class="btn-add" onclick="salvarAnamnese()">Gravar Anamnese</button>
+                </div>
+                <div id="historico-anamnese"></div>
             </div>
-            <div id="view-admin-equipe" class="view-section" style="display:none;"><table class="tabela-dados"><thead><tr><th>Nome</th><th>Cargo</th><th>Ações</th></tr></thead><tbody id="lista-profissionais-tabela"></tbody></table></div>
+
+            <div id="view-admin-equipe" class="view-section" style="display:none;">
+                <h2>Gestão de Equipe Profissional</h2>
+                <table class="tabela-dados">
+                    <thead><tr><th>Nome</th><th>Cargo</th><th>E-mail</th><th>Ações</th></tr></thead>
+                    <tbody id="lista-profissionais-tabela"></tbody>
+                </table>
+            </div>
+
+            <div id="view-diario" class="view-section" style="display:none;"><div class="cards-grid" id="cards-diario-acolhidos"></div></div>
+            <div id="view-plantao" class="view-section" style="display:none;"><div id="historico-plantoes"></div></div>
+            <div id="view-social-docs" class="view-section" style="display:none;"><div class="cards-grid" id="lista-docs-social"></div></div>
         </main>
     </div>
 
